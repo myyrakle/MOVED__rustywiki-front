@@ -1,5 +1,6 @@
 import { Action } from "redux";
 import { MainAction } from "./actions/user_info";
+import { LOGIN, LOGOUT, UPDATE_MY_INFO } from "./action_types";
 
 const defaultState = {
     myinfo: {
@@ -10,9 +11,9 @@ const defaultState = {
     },
 } as const;
 
-function mainReducer(state = defaultState, action: MainAction) {
+export function mainReducer(state = defaultState, action: MainAction) {
     switch (action.type) {
-        case "LOGIN":
+        case LOGIN:
             return {
                 myinfo: {
                     authorized: true,
@@ -21,7 +22,7 @@ function mainReducer(state = defaultState, action: MainAction) {
                     nickname: "",
                 },
             };
-        case "LOGOUT":
+        case LOGOUT:
             return {
                 myinfo: {
                     authorized: false,
@@ -30,7 +31,7 @@ function mainReducer(state = defaultState, action: MainAction) {
                     nickname: "",
                 },
             };
-        case "UPDATE_MY_INFO":
+        case UPDATE_MY_INFO:
             return {
                 myinfo: {
                     authorized: state.myinfo.authorized,
@@ -43,5 +44,3 @@ function mainReducer(state = defaultState, action: MainAction) {
             return state;
     }
 }
-
-export default mainReducer;

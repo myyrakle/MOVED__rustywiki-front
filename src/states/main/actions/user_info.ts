@@ -1,15 +1,15 @@
-import * as redux from "redux";
+import { LOGIN, LOGOUT, UPDATE_MY_INFO } from "../action_types";
 
 export function actionUpdateMyInfo(email: string, nickname: string) {
-    return { type: "UPDATE_MY_INFO" as const, email, nickname };
+    return { type: UPDATE_MY_INFO, email, nickname };
 }
 
 export function actionLogin(user_type: string) {
-    return { type: "LOGIN" as const, user_type };
+    return { type: LOGIN, user_type };
 }
 
 export function actionLogout() {
-    return { type: "LOGOUT" as const };
+    return { type: LOGOUT };
 }
 
 export type MainAction =
