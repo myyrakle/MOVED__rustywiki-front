@@ -4,9 +4,15 @@
       "next/babel",
       {
         "preset-env": {
-          "useBuiltIns": "entry" //tells the preset to look for browserslist config source
+          "useBuiltIns": "entry", //tells the preset to look for browserslist config source
+          "corejs": "3"
+        },
+        "preset-react": {
+          "runtime": "automatic",
+          "importSource": "@emotion/react"
         }
       }
     ]
-  ]
+  ],
+  "plugins": ["@emotion/babel-plugin"]
 }
