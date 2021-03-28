@@ -5,7 +5,7 @@ import {
 } from '@material-ui/core/styles'
 import { CssBaseline } from '@material-ui/core'
 
-const theme = createMuiTheme({
+export const theme = createMuiTheme({
   palette: {
     primary: {
       main: '#6772e5',
