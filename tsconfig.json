@@ -16,6 +16,8 @@
     "noEmit": true,
     "jsx": "preserve"
   },
-  "include": ["src"],
-  "exclude": ["node_modules"]
+  "include": [
+    "**/*"
+  ],
+  "exclude": ["node_modules", ".next", ".storybook", "public"]
 }
