@@ -1,7 +1,7 @@
 import { withNextRouter } from 'storybook-addon-next-router'
 import { muiTheme } from 'storybook-addon-material-ui'
 import { addDecorator } from '@storybook/react'
-import { theme } from '../shared/CustomTheme'
+import CustomTheme, { theme } from '../shared/CustomTheme'
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
 }
@@ -16,3 +16,9 @@ addDecorator(
     push() {}, // defaults to using addon actions integration, can override any method in the router
   })
 )
+
+addDecorator((Story) => (
+  <CustomTheme>
+    <Story />
+  </CustomTheme>
+))
