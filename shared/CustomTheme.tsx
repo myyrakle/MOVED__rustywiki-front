@@ -4,6 +4,7 @@ import {
   ThemeProvider as MuiThemeProvider,
 } from '@material-ui/core/styles'
 import { CssBaseline } from '@material-ui/core'
+import { css, Global } from '@emotion/react'
 
 export const theme = createMuiTheme({
   palette: {
@@ -20,8 +21,16 @@ export default function CustomTheme(props: {
 }): JSX.Element {
   return (
     <MuiThemeProvider theme={theme}>
+      <Global
+        styles={css`
+          a {
+            text-decoration: none;
+          }
+        `}
+      />
       <StylesProvider injectFirst>
         <CssBaseline />
+
         {props.children}
       </StylesProvider>
     </MuiThemeProvider>
