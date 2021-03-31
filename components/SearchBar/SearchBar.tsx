@@ -47,9 +47,9 @@ const SearchBar: React.FunctionComponent<ISearchBarProps> = () => {
           align-items: center;
           transition: all 0.2s;
           ${mq
-            ? `width: 20ch;
+            ? `width: 24ch;
               &:focus-within {
-                width: 28ch;
+                width: 32ch;
               }`
             : `width: 100%`}
         `}
@@ -81,6 +81,7 @@ const SearchBar: React.FunctionComponent<ISearchBarProps> = () => {
             height: 42px;
             width: 28px;
           `}
+          tabIndex={-1}
         >
           <SearchIcon fontSize="small" />
         </IconButton>
