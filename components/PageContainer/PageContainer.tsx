@@ -42,7 +42,7 @@ const PageContainer: React.FunctionComponent<IPageContainerProps> = ({
   return (
     <Paper
       css={css`
-        padding: ${mq ? '24px' : '11.2px'};
+        padding: ${mq ? '11.2px' : '24px'};
         position: relative;
       `}
     >
@@ -69,9 +69,12 @@ const PageContainer: React.FunctionComponent<IPageContainerProps> = ({
           css={css`
             flex-shrink: 1;
             ${mq
-              ? `position: absolute;
-            top: 0;
-            left: 0;`
+              ? `
+              position: absolute;
+              top: 0;
+              left: 0;
+              margin-top: -1px;
+            `
               : ''}
           `}
         >
