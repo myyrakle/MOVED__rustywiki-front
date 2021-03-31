@@ -11,6 +11,9 @@ export const theme = createMuiTheme({
     primary: {
       main: '#6772e5',
     },
+    text: {
+      secondary: '#0275d8',
+    },
   },
 })
 
@@ -25,12 +28,15 @@ export default function CustomTheme(props: {
         styles={css`
           a {
             text-decoration: none;
+            color: ${theme.palette.text.secondary};
+            &:hover {
+              text-decoration: underline;
+            }
           }
         `}
       />
       <StylesProvider injectFirst>
         <CssBaseline />
-
         {props.children}
       </StylesProvider>
     </MuiThemeProvider>
