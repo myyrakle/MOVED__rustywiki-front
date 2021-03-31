@@ -11,7 +11,6 @@ import {
   useTheme,
 } from '@material-ui/core'
 import PersonIcon from '@material-ui/icons/Person'
-// import SearchIcon from '@material-ui/icons/Menu'
 import SearchBar from '../SearchBar'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
