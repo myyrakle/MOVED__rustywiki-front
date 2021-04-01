@@ -1,3 +1,3 @@
-import api from './api-client'
+import api from './MainApiClient'
 
 export default api
