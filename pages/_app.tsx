@@ -9,6 +9,13 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
   if (!queryClientRef.current) {
     queryClientRef.current = new QueryClient()
   }
+
+  React.useEffect(() => {
+    // Remove the server-side injected CSS.
+    const jssStyles = document.querySelector('#jss-server-side')
+    jssStyles?.parentElement?.removeChild(jssStyles)
+  }, [])
+
   return (
     <>
       <QueryClientProvider client={queryClientRef.current}>
