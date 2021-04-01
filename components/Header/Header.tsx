@@ -12,6 +12,7 @@ import {
 } from '@material-ui/core'
 import PersonIcon from '@material-ui/icons/Person'
 import SearchBar from '../SearchBar'
+import { routes } from '../../libs/const/routes'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface IHeaderProps {}
@@ -108,7 +109,9 @@ const Header: React.FunctionComponent<IHeaderProps> = () => {
           <MenuItem>내 문서 기여 목록</MenuItem>
           <MenuItem>내 토론 기여 목록</MenuItem>
           <Divider orientation="horizontal" />
-          <MenuItem>로그인</MenuItem>
+          <Link href={routes.login}>
+            <MenuItem>로그인</MenuItem>
+          </Link>
         </Menu>
       </div>
       <Hidden xsDown={false} smUp>
