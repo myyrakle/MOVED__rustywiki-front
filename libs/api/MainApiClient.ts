@@ -4,7 +4,10 @@ import { AuthApi } from './AuthApi'
 import { UserApi } from './UserApi'
 
 class Api {
-  axios = Axios.create()
+  axios = Axios.create({
+    baseURL: '/api',
+    withCredentials: true,
+  })
 
   auth: AuthApi
   user: UserApi
@@ -12,6 +15,7 @@ class Api {
   constructor() {
     this.auth = new AuthApi(this.axios)
     this.user = new UserApi(this.axios)
+    this.axios.defaults.headers = { 'Content-Type': 'application/json' }
 
     if (util.isServer()) {
       return
