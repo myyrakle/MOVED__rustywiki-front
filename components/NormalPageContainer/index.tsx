@@ -3,7 +3,7 @@ import { Paper } from '@material-ui/core'
 import * as React from 'react'
 
 interface INormalPageContainerProps {
-  title: React.ReactNode
+  title?: React.ReactNode
 }
 
 const NormalPageContainer: React.FunctionComponent<INormalPageContainerProps> = ({

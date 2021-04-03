@@ -3,6 +3,7 @@ import { AppProps } from 'next/app'
 import CustomTheme from '../shared/CustomTheme'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { Hydrate } from 'react-query/hydration'
+import { RecoilRoot } from 'recoil'
 
 export default function App({ Component, pageProps }: AppProps): JSX.Element {
   const queryClientRef = React.useRef<QueryClient>()
@@ -18,13 +19,15 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
 
   return (
     <>
-      <QueryClientProvider client={queryClientRef.current}>
-        <Hydrate state={pageProps.dehydratedState}>
-          <CustomTheme>
-            <Component {...pageProps} />
-          </CustomTheme>
-        </Hydrate>
-      </QueryClientProvider>
+      <RecoilRoot>
+        <QueryClientProvider client={queryClientRef.current}>
+          <Hydrate state={pageProps.dehydratedState}>
+            <CustomTheme>
+              <Component {...pageProps} />
+            </CustomTheme>
+          </Hydrate>
+        </QueryClientProvider>
+      </RecoilRoot>
     </>
   )
 }
