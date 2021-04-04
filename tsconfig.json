@@ -17,5 +17,10 @@
     "jsx": "preserve"
   },
   "include": ["**/*"],
-  "exclude": ["node_modules", ".next", ".storybook", "public"]
+  "exclude": [
+    "node_modules",
+    ".next",
+    ".storybook",
+    "public"
+  ]
 }

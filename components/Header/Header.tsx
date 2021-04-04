@@ -13,12 +13,14 @@ import {
 import PersonIcon from '@material-ui/icons/Person'
 import SearchBar from '../SearchBar'
 import { routes } from '../../libs/const/routes'
+import { useDarkMode } from '../../hooks/useDarkMode'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface IHeaderProps {}
 
 const Header: React.FunctionComponent<IHeaderProps> = () => {
   const theme = useTheme()
+  const { mode, setMode } = useDarkMode()
 
   /** 로그인 메뉴 관련 */
   const [anchorEl, setAnchorEl] = React.useState(null)
@@ -104,7 +106,13 @@ const Header: React.FunctionComponent<IHeaderProps> = () => {
           }}
         >
           <MenuItem>설정</MenuItem>
-          <MenuItem>다크 테마로</MenuItem>
+          <MenuItem
+            onClick={() => {
+              mode === 'dark' ? setMode('light') : setMode('dark')
+            }}
+          >
+            {mode === 'dark' ? '라이트 테마로' : '다크 테마로'}
+          </MenuItem>
           <Divider orientation="horizontal" />
           <MenuItem>내 문서 기여 목록</MenuItem>
           <MenuItem>내 토론 기여 목록</MenuItem>

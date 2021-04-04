@@ -5,6 +5,7 @@ import {
 } from '@material-ui/core/styles'
 import { CssBaseline } from '@material-ui/core'
 import { css, Global } from '@emotion/react'
+import { useDarkMode } from '../hooks/useDarkMode'
 
 export const theme = createMuiTheme({
   palette: {
@@ -17,28 +18,49 @@ export const theme = createMuiTheme({
   },
 })
 
+export const darkTheme = createMuiTheme({
+  palette: {
+    background: { paper: '#2D333B', default: '#22272E' },
+    primary: {
+      main: '#2D333B',
+    },
+    text: {
+      primary: '#ADBAC7',
+      secondary: '#768390',
+    },
+  },
+})
+
 export type Theme = typeof theme
 
 export default function CustomTheme(props: {
   children: React.ReactNode
 }): JSX.Element {
+  const { mode } = useDarkMode()
   return (
-    <MuiThemeProvider theme={theme}>
-      <Global
-        styles={css`
-          a {
-            text-decoration: none;
-            color: ${theme.palette.text.secondary};
-            &:hover {
-              text-decoration: underline;
+    <div style={{}}>
+      <MuiThemeProvider theme={mode === 'dark' ? darkTheme : theme}>
+        <Global
+          styles={css`
+            a {
+              text-decoration: none;
+              color: ${theme.palette.text.secondary};
+              &:hover {
+                text-decoration: underline;
+              }
             }
-          }
-        `}
-      />
-      <StylesProvider injectFirst>
-        <CssBaseline />
-        {props.children}
-      </StylesProvider>
-    </MuiThemeProvider>
+            html {
+            }
+            body {
+              visibility: ${mode ? 'visible' : 'hidden'};
+            }
+          `}
+        />
+        <StylesProvider injectFirst>
+          <CssBaseline />
+          {props.children}
+        </StylesProvider>
+      </MuiThemeProvider>
+    </div>
   )
 }
