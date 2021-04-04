@@ -38,29 +38,27 @@ export default function CustomTheme(props: {
 }): JSX.Element {
   const { mode } = useDarkMode()
   return (
-    <div style={{}}>
-      <MuiThemeProvider theme={mode === 'dark' ? darkTheme : theme}>
-        <Global
-          styles={css`
-            a {
-              text-decoration: none;
-              color: ${theme.palette.text.secondary};
-              &:hover {
-                text-decoration: underline;
-              }
+    <MuiThemeProvider theme={mode === 'dark' ? darkTheme : theme}>
+      <Global
+        styles={css`
+          a {
+            text-decoration: none;
+            color: ${theme.palette.text.secondary};
+            &:hover {
+              text-decoration: underline;
             }
-            html {
-            }
-            body {
-              visibility: ${mode ? 'visible' : 'hidden'};
-            }
-          `}
-        />
-        <StylesProvider injectFirst>
-          <CssBaseline />
-          {props.children}
-        </StylesProvider>
-      </MuiThemeProvider>
-    </div>
+          }
+          html {
+          }
+          body {
+            visibility: ${mode ? 'visible' : 'hidden'};
+          }
+        `}
+      />
+      <StylesProvider injectFirst>
+        <CssBaseline />
+        {props.children}
+      </StylesProvider>
+    </MuiThemeProvider>
   )
 }

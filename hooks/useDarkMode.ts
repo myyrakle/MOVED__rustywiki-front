@@ -7,12 +7,12 @@ const darkModeState = atom<ModeType>({
   key: 'darkMode',
 })
 const mountedState = atom({ default: false, key: 'appMounted' })
+const modeKey = 'darkMode'
 
 export function useDarkMode(): {
   mode: ModeType
   setMode: (mode: ModeType) => void
 } {
-  const modeKey = 'darkMode'
   const [mounted, setMounted] = useRecoilState(mountedState)
   const [mode, setMode] = useRecoilState(darkModeState)
 
