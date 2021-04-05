@@ -38,7 +38,9 @@ const Header: React.FunctionComponent<IHeaderProps> = () => {
         css={css`
           display: flex;
           justify-content: center;
-          background-color: ${theme.palette.primary.main};
+          background-color: ${mode === 'dark'
+            ? theme.palette.background.paper
+            : theme.palette.primary.main};
         `}
       >
         <nav

@@ -49,7 +49,7 @@ const SignUpPage: React.FunctionComponent<null> = () => {
         <form
           css={css`
             margin: auto;
-            width: 400px;
+            max-width: 400px;
           `}
           onSubmit={handleSubmit(submit)}
           noValidate

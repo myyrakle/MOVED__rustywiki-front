@@ -20,9 +20,10 @@ export const theme = createMuiTheme({
 
 export const darkTheme = createMuiTheme({
   palette: {
-    background: { paper: '#2D333B', default: '#22272E' },
+    type: 'dark',
+    background: { paper: '#2D333B ', default: '#22272E' },
     primary: {
-      main: '#2D333B',
+      main: '#DDD',
     },
     text: {
       primary: '#ADBAC7',

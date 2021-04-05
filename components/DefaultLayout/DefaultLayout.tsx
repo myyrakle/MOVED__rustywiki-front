@@ -12,6 +12,7 @@ const DefaultLayout: React.FunctionComponent<IDefaultLayoutProps> = ({
 }) => {
   const theme = useTheme()
   const mq = useMediaQuery(theme.breakpoints.up('md'))
+  const mobile = useMediaQuery(theme.breakpoints.down('xs'))
   return (
     <div>
       <Header />
@@ -21,6 +22,7 @@ const DefaultLayout: React.FunctionComponent<IDefaultLayoutProps> = ({
             max-width: 1300px;
             display: ${mq ? 'flex' : 'block'};
             margin: auto;
+            margin-top: ${mobile ? 0 : '10px'};
           `}
         >
           <article
