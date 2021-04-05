@@ -9,6 +9,7 @@ import * as React from 'react'
 import ShuffleIcon from '@material-ui/icons/Shuffle'
 import SearchIcon from '@material-ui/icons/SearchOutlined'
 
+//TODO: Search기능 연동 및 Enter, 키다운 입력시 처리 필요
 export interface ISearchBarProps {
   /**
    * enter 클릭시 존재하면 페이지 바로가기 없으면 검색
@@ -38,8 +39,10 @@ const SearchBar: React.FunctionComponent<ISearchBarProps> = () => {
       <div
         css={css`
           display: flex;
-          background-color: white;
-          border: 1px solid #ccc;
+          background-color: ${theme.palette.type === 'dark'
+            ? 'transparent'
+            : 'white'};
+          border: 1px solid ${theme.palette.type === 'dark' ? '#444' : '#ccc'};
           box-sizing: border-box;
           height: 42px;
           width: auto;
@@ -67,8 +70,10 @@ const SearchBar: React.FunctionComponent<ISearchBarProps> = () => {
           css={css`
             min-width: unset;
             height: 42px;
-            border-right: 1px solid #ccc;
-            border-left: 1px solid #ccc;
+            border-right: 1px solid
+              ${theme.palette.type === 'dark' ? '#444' : '#ccc'};
+            border-left: 1px solid
+              ${theme.palette.type === 'dark' ? '#444' : '#ccc'};
             padding-left: 10px;
             font-size: 14px;
 
