@@ -14,9 +14,10 @@ import PersonIcon from '@material-ui/icons/Person'
 import SearchBar from '../SearchBar'
 import { routes } from '../../libs/const/routes'
 import { useDarkMode } from '../../hooks/useDarkMode'
-
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface IHeaderProps {}
+import { AuthType } from '../../hooks/useAccess'
+export interface IHeaderProps {
+  user: AuthType
+}
 
 const Header: React.FunctionComponent<IHeaderProps> = () => {
   const theme = useTheme()

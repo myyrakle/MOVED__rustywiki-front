@@ -11,6 +11,4 @@ export default {
 const Template: Story<IHeaderProps> = (args) => <Header {...args} />
 
 export const Default = Template.bind({})
-Default.args = {
-  user: {},
-}
+Default.args = {}

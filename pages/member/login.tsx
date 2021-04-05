@@ -10,8 +10,10 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import * as React from 'react'
 import { Controller, useForm } from 'react-hook-form'
+import { useRecoilState } from 'recoil'
 import DefaultLayout from '../../components/DefaultLayout'
 import NormalPageContainer from '../../components/NormalPageContainer'
+import { userState } from '../../hooks/useAccess'
 import api from '../../libs/api'
 import { routes } from '../../libs/const/routes'
 
@@ -23,19 +25,19 @@ type LoginFormType = {
 const LoginPage = (): JSX.Element => {
   const { handleSubmit, setError, control } = useForm<LoginFormType>()
   const [loading, setLoading] = React.useState(false)
+  const [user, setUser] = useRecoilState(userState)
   const router = useRouter()
   const onSubmit = React.useCallback(
     async (v) => {
       try {
         setLoading(true)
         await api.auth.login(v.id, v.password)
-        //TODO: 로그인 httpOnly 쿠키처리로 요청
-        const redirect = router.query?.redirect
-        if (Array.isArray(redirect)) {
-          router.replace(redirect?.[0] ?? routes.main)
-          return
-        }
-        router.replace(redirect ?? routes.main)
+        const data = await api.user.getMyInfo()
+        setUser({
+          auth: true,
+          email: data?.email,
+          nickname: data?.nickname,
+        })
       } catch (error) {
         setError('password', {
           message: '아이디와 패스워드가 일치하지 않습니다.',
@@ -46,6 +48,17 @@ const LoginPage = (): JSX.Element => {
     },
     [router.query?.redirect]
   )
+
+  React.useEffect(() => {
+    if (user.auth) {
+      const redirect = router.query?.redirect
+      if (Array.isArray(redirect)) {
+        router.replace(redirect?.[0] ?? routes.main)
+        return
+      }
+      router.replace(redirect ?? routes.main)
+    }
+  }, [user])
 
   return (
     <DefaultLayout>
