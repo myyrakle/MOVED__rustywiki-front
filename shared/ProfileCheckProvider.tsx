@@ -1,10 +1,12 @@
 import * as React from 'react'
 import { useRecoilState } from 'recoil'
 import { userState } from '../hooks/useAccess'
-import api from '../libs/api'
+import useApi from '../hooks/useApi'
 
-const ProfileCheck: React.FunctionComponent<any> = (props) => {
+const ProfileCheckProvider: React.FunctionComponent<any> = (props) => {
   const [, setUser] = useRecoilState(userState)
+  const api = useApi()
+
   React.useEffect(() => {
     api.user.getMyInfo().then((data) => {
       setUser({
@@ -17,4 +19,4 @@ const ProfileCheck: React.FunctionComponent<any> = (props) => {
   return props.children
 }
 
-export default ProfileCheck
+export default ProfileCheckProvider

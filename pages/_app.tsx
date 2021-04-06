@@ -4,7 +4,9 @@ import CustomTheme from '../shared/CustomTheme'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { Hydrate } from 'react-query/hydration'
 import { RecoilRoot } from 'recoil'
-import ProfileCheck from '../shared/ProfileCheck'
+import ProfileCheckProvider from '../shared/ProfileCheckProvider'
+import { ApiProvider } from '../hooks/useApi'
+import api from '../libs/api'
 
 export default function App({ Component, pageProps }: AppProps): JSX.Element {
   const queryClientRef = React.useRef<QueryClient>()
@@ -21,17 +23,19 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
 
   return (
     <>
-      <RecoilRoot>
-        <QueryClientProvider client={queryClientRef.current}>
-          <Hydrate state={pageProps.dehydratedState}>
-            <CustomTheme>
-              <ProfileCheck>
-                <Component {...pageProps} />
-              </ProfileCheck>
-            </CustomTheme>
-          </Hydrate>
-        </QueryClientProvider>
-      </RecoilRoot>
+      <ApiProvider mainApi={api}>
+        <RecoilRoot>
+          <QueryClientProvider client={queryClientRef.current}>
+            <Hydrate state={pageProps.dehydratedState}>
+              <CustomTheme>
+                <ProfileCheckProvider>
+                  <Component {...pageProps} />
+                </ProfileCheckProvider>
+              </CustomTheme>
+            </Hydrate>
+          </QueryClientProvider>
+        </RecoilRoot>
+      </ApiProvider>
     </>
   )
 }

@@ -4,9 +4,9 @@ import * as React from 'react'
 import DefaultLayout from '../../components/DefaultLayout'
 import NormalPageContainer from '../../components/NormalPageContainer'
 import { Controller, useForm } from 'react-hook-form'
-import api from '../../libs/api'
 import { useRouter } from 'next/dist/client/router'
 import { routes } from '../../libs/const/routes'
+import useApi from '../../hooks/useApi'
 
 const spacing = css`
   margin-top: 10px;
@@ -22,6 +22,7 @@ type SingUpForm = {
 const SignUpPage: React.FunctionComponent<null> = () => {
   const { control, handleSubmit, getValues, setError } = useForm<SingUpForm>()
   const router = useRouter()
+  const api = useApi()
 
   const [loading, setLoading] = React.useState(false)
 

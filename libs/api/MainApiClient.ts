@@ -3,7 +3,7 @@ import util from '../util'
 import { AuthApi } from './AuthApi'
 import { UserApi } from './UserApi'
 
-class Api {
+export class MainApi {
   axios = Axios.create({
     baseURL: '/api',
     withCredentials: true,
@@ -38,6 +38,6 @@ class Api {
   }
 }
 
-const api = new Api()
+const api = new MainApi()
 
 export default api
