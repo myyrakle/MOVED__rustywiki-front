@@ -6,6 +6,7 @@ import {
 import { CssBaseline } from '@material-ui/core'
 import { css, Global } from '@emotion/react'
 import { useDarkMode } from '../hooks/useDarkMode'
+import { SnackbarProvider } from 'notistack'
 
 export const theme = createMuiTheme({
   palette: {
@@ -58,7 +59,7 @@ export default function CustomTheme(props: {
       />
       <StylesProvider injectFirst>
         <CssBaseline />
-        {props.children}
+        <SnackbarProvider maxSnack={3}>{props.children}</SnackbarProvider>
       </StylesProvider>
     </MuiThemeProvider>
   )

@@ -8,13 +8,14 @@ import {
 } from '@material-ui/core'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useSnackbar } from 'notistack'
 import * as React from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { useRecoilState } from 'recoil'
 import DefaultLayout from '../../components/DefaultLayout'
 import NormalPageContainer from '../../components/NormalPageContainer'
 import { userState } from '../../hooks/useAccess'
-import api from '../../libs/api'
+import useApi from '../../hooks/useApi'
 import { routes } from '../../libs/const/routes'
 
 type LoginFormType = {
@@ -27,6 +28,9 @@ const LoginPage = (): JSX.Element => {
   const [loading, setLoading] = React.useState(false)
   const [user, setUser] = useRecoilState(userState)
   const router = useRouter()
+  const { enqueueSnackbar } = useSnackbar()
+  const api = useApi()
+
   const onSubmit = React.useCallback(
     async (v) => {
       try {
@@ -37,6 +41,11 @@ const LoginPage = (): JSX.Element => {
           auth: true,
           email: data?.email,
           nickname: data?.nickname,
+        })
+        enqueueSnackbar('로그인에 성공했습니다', {
+          variant: 'success',
+          autoHideDuration: 3000,
+          anchorOrigin: { horizontal: 'center', vertical: 'bottom' },
         })
       } catch (error) {
         setError('password', {
