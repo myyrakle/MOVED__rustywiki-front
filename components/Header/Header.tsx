@@ -14,7 +14,11 @@ import PersonIcon from '@material-ui/icons/Person'
 import SearchBar from '../SearchBar'
 import { routes } from '../../libs/const/routes'
 import { useDarkMode } from '../../hooks/useDarkMode'
-import { AuthType } from '../../hooks/useAccess'
+import useAccess, { AuthType } from '../../hooks/useAccess'
+import useApi from '../../hooks/useApi'
+import { useRouter } from 'next/router'
+import { storageKey } from '../../libs/const/storageKey'
+
 export interface IHeaderProps {
   user: AuthType
 }
@@ -22,6 +26,9 @@ export interface IHeaderProps {
 const Header: React.FunctionComponent<IHeaderProps> = () => {
   const theme = useTheme()
   const { mode, setMode } = useDarkMode()
+  const { user } = useAccess()
+  const api = useApi()
+  const router = useRouter()
 
   /** 로그인 메뉴 관련 */
   const [anchorEl, setAnchorEl] = React.useState(null)
@@ -120,9 +127,22 @@ const Header: React.FunctionComponent<IHeaderProps> = () => {
           <MenuItem>내 문서 기여 목록</MenuItem>
           <MenuItem>내 토론 기여 목록</MenuItem>
           <Divider orientation="horizontal" />
-          <Link href={routes.login}>
-            <MenuItem>로그인</MenuItem>
-          </Link>
+          {user.auth ? (
+            <MenuItem
+              onClick={async () => {
+                const token = localStorage.getItem(storageKey.refreshToken)
+                await api.auth.logout(token!)
+                localStorage.removeItem(storageKey.refreshToken)
+                router.reload()
+              }}
+            >
+              로그아웃
+            </MenuItem>
+          ) : (
+            <Link href={routes.login}>
+              <MenuItem>로그인</MenuItem>
+            </Link>
+          )}
         </Menu>
       </div>
       <Hidden xsDown={false} smUp>

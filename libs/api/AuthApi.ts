@@ -8,7 +8,7 @@ type SignUpResponse = DefaultResponse & {
 
 type LoginResponse = DefaultResponse & {
   login_failed: boolean
-  token: string
+  refresh_token: string
 }
 
 export class AuthApi {
@@ -28,10 +28,24 @@ export class AuthApi {
   }
 
   async login(email: string, password: string): Promise<LoginResponse> {
-    const { data } = await this.axios.post<LoginResponse>('/auth/login', {
+    const result = await this.axios.post<LoginResponse>('/auth/login', {
       email,
       password,
     })
-    return data
+    return result?.data
+  }
+
+  async refresh(token: string): Promise<LoginResponse> {
+    const result = await this.axios.put<LoginResponse>('/auth/refresh', {
+      refresh_token: token,
+      __isRetryRequest: true,
+    })
+    return result?.data
+  }
+
+  async logout(token?: string): Promise<void> {
+    await this.axios.delete<LoginResponse>('/auth/logout', {
+      data: { refresh_token: token },
+    })
   }
 }
