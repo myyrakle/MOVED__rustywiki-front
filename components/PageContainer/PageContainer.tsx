@@ -1,4 +1,4 @@
-import { css } from '@emotion/react'
+import { css } from '@emotion/react';
 import {
   Button,
   ButtonGroup,
@@ -6,16 +6,16 @@ import {
   Paper,
   useMediaQuery,
   useTheme,
-} from '@material-ui/core'
-import Link from 'next/link'
-import * as React from 'react'
-import StarOutline from '@material-ui/icons/StarOutline'
-import Star from '@material-ui/icons/Star'
-import dayjs from 'dayjs'
+} from '@material-ui/core';
+import Link from 'next/link';
+import * as React from 'react';
+import StarOutline from '@material-ui/icons/StarOutline';
+import Star from '@material-ui/icons/Star';
+import dayjs from 'dayjs';
 
 export interface IPageContainerProps {
-  title?: string
-  updatedAt?: Date
+  title?: string;
+  updatedAt?: Date;
 }
 
 const ToolBarGroup = () => (
@@ -30,15 +30,15 @@ const ToolBarGroup = () => (
     <Button>역사</Button>
     <Button>ACL</Button>
   </ButtonGroup>
-)
+);
 
 const PageContainer: React.FunctionComponent<IPageContainerProps> = ({
   children,
   title = '',
   updatedAt = new Date(),
 }) => {
-  const theme = useTheme()
-  const mq = useMediaQuery(theme.breakpoints.down('xs'))
+  const theme = useTheme();
+  const mq = useMediaQuery(theme.breakpoints.down('xs'));
   return (
     <Paper
       css={css`
@@ -153,7 +153,7 @@ const PageContainer: React.FunctionComponent<IPageContainerProps> = ({
       </div>
       {children}
     </Paper>
-  )
-}
+  );
+};
 
-export default PageContainer
+export default PageContainer;

@@ -1,70 +1,70 @@
-import { css } from '@emotion/react'
-import { Button, FormControl, TextField } from '@material-ui/core'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { useSnackbar } from 'notistack'
-import * as React from 'react'
-import { Controller, useForm } from 'react-hook-form'
-import { useRecoilState } from 'recoil'
-import DefaultLayout from '../../components/DefaultLayout'
-import NormalPageContainer from '../../components/NormalPageContainer'
-import { userState } from '../../hooks/useAccess'
-import useApi from '../../hooks/useApi'
-import { ROUTES } from '../../libs/const/routes'
-import { STORAGE_KEY } from '../../libs/const/storageKey'
+import { css } from '@emotion/react';
+import { Button, FormControl, TextField } from '@material-ui/core';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useSnackbar } from 'notistack';
+import * as React from 'react';
+import { Controller, useForm } from 'react-hook-form';
+import { useRecoilState } from 'recoil';
+import DefaultLayout from '../../components/DefaultLayout';
+import NormalPageContainer from '../../components/NormalPageContainer';
+import { userState } from '../../hooks/useAccess';
+import useApi from '../../hooks/useApi';
+import { ROUTES } from '../../libs/const/routes';
+import { STORAGE_KEY } from '../../libs/const/storageKey';
 
 type LoginFormType = {
-  id: string
-  password: string
-}
+  id: string;
+  password: string;
+};
 
 const LoginPage = (): JSX.Element => {
-  const { handleSubmit, setError, control } = useForm<LoginFormType>()
-  const [loading, setLoading] = React.useState(false)
-  const [user, setUser] = useRecoilState(userState)
-  const router = useRouter()
-  const { enqueueSnackbar } = useSnackbar()
-  const api = useApi()
+  const { handleSubmit, setError, control } = useForm<LoginFormType>();
+  const [loading, setLoading] = React.useState(false);
+  const [user, setUser] = useRecoilState(userState);
+  const router = useRouter();
+  const { enqueueSnackbar } = useSnackbar();
+  const api = useApi();
 
   const onSubmit = React.useCallback(
     async (v) => {
       try {
-        setLoading(true)
-        const loginRes = await api.auth.login(v.id, v.password)
-        localStorage.setItem(STORAGE_KEY.REFRESH_TOKEN, loginRes.refresh_token)
-        const data = await api.user.getMyInfo()
+        setLoading(true);
+        const loginRes = await api.auth.login(v.id, v.password);
+        localStorage.setItem(STORAGE_KEY.REFRESH_TOKEN, loginRes.refresh_token);
+        const data = await api.user.getMyInfo();
         setUser({
           auth: true,
           email: data?.email,
           nickname: data?.nickname,
-        })
+        });
 
         enqueueSnackbar('로그인에 성공했습니다', {
           variant: 'success',
           autoHideDuration: 3000,
           anchorOrigin: { horizontal: 'center', vertical: 'bottom' },
-        })
+        });
       } catch (error) {
         setError('password', {
           message: '아이디와 패스워드가 일치하지 않습니다.',
-        })
+        });
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
     },
     [router.query?.redirect]
-  )
+  );
 
   React.useEffect(() => {
     if (user.auth) {
-      const redirect = router.query?.redirect
+      const redirect = router.query?.redirect;
       if (Array.isArray(redirect)) {
-        router.replace(redirect?.[0] ?? ROUTES.MAIN)
-        return
+        router.replace(redirect?.[0] ?? ROUTES.MAIN);
+        return;
       }
-      router.replace(redirect ?? ROUTES.MAIN)
+      router.replace(redirect ?? ROUTES.MAIN);
     }
-  }, [user])
+  }, [user]);
 
   return (
     <DefaultLayout>
@@ -102,7 +102,7 @@ const LoginPage = (): JSX.Element => {
                       error={p.fieldState.invalid}
                       helperText={p.fieldState.error?.message}
                     />
-                  )
+                  );
                 }}
               />
             </FormControl>
@@ -170,7 +170,7 @@ const LoginPage = (): JSX.Element => {
         </div>
       </NormalPageContainer>
     </DefaultLayout>
-  )
-}
+  );
+};
 
-export default LoginPage
+export default LoginPage;

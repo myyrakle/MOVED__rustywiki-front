@@ -1,15 +1,15 @@
-import { withNextRouter } from 'storybook-addon-next-router'
-import { muiTheme } from 'storybook-addon-material-ui'
-import { addDecorator } from '@storybook/react'
-import CustomTheme, { theme } from '../shared/CustomTheme'
-import { RecoilRoot } from 'recoil'
-import { useDarkMode } from '../hooks/useDarkMode'
-import { useEffect } from 'react'
+import { withNextRouter } from 'storybook-addon-next-router';
+import { muiTheme } from 'storybook-addon-material-ui';
+import { addDecorator } from '@storybook/react';
+import CustomTheme, { theme } from '../shared/CustomTheme';
+import { RecoilRoot } from 'recoil';
+import { useDarkMode } from '../hooks/useDarkMode';
+import { useEffect } from 'react';
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
-}
+};
 
-export const decorators = [muiTheme(theme)]
+export const decorators = [muiTheme(theme)];
 
 addDecorator(
   withNextRouter({
@@ -18,16 +18,16 @@ addDecorator(
     query: {}, // defaults to `{}`
     push() {}, // defaults to using addon actions integration, can override any method in the router
   })
-)
+);
 
 addDecorator((Story, ctx) => {
-  const isDark = ctx?.globals?.backgrounds?.value === '#333333'
-  const { setMode } = useDarkMode()
+  const isDark = ctx?.globals?.backgrounds?.value === '#333333';
+  const { setMode } = useDarkMode();
   useEffect(() => {
-    setMode(isDark ? 'dark' : 'light')
-  }, [])
-  return <Story />
-})
+    setMode(isDark ? 'dark' : 'light');
+  }, []);
+  return <Story />;
+});
 
 addDecorator((Story) => (
   <RecoilRoot>
@@ -35,4 +35,4 @@ addDecorator((Story) => (
       <Story />
     </CustomTheme>
   </RecoilRoot>
-))
+));

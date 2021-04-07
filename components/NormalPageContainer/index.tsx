@@ -1,9 +1,9 @@
-import { css } from '@emotion/react'
-import { Paper } from '@material-ui/core'
-import * as React from 'react'
+import { css } from '@emotion/react';
+import { Paper } from '@material-ui/core';
+import * as React from 'react';
 
 interface INormalPageContainerProps {
-  title?: React.ReactNode
+  title?: React.ReactNode;
 }
 
 const NormalPageContainer: React.FunctionComponent<INormalPageContainerProps> = ({
@@ -26,7 +26,7 @@ const NormalPageContainer: React.FunctionComponent<INormalPageContainerProps> = 
       </h1>
       {children}
     </Paper>
-  )
-}
+  );
+};
 
-export default NormalPageContainer
+export default NormalPageContainer;

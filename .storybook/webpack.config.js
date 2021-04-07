@@ -1,4 +1,4 @@
-const path = require('path')
+const path = require('path');
 
 module.exports = ({ config }) => {
   // use @babel/preset-react for JSX and env (instead of staged presets)
@@ -6,7 +6,7 @@ module.exports = ({ config }) => {
     require.resolve('@babel/preset-react'),
     require.resolve('@babel/preset-env'),
     require.resolve('@emotion/babel-preset-css-prop'),
-  ]
+  ];
   // ... other configs
 
   // Add Webpack rules for TypeScript
@@ -21,10 +21,10 @@ module.exports = ({ config }) => {
       ],
       // ... other configs
     },
-  })
+  });
   // ... other configs
 
-  config.resolve.extensions.push('.ts', '.tsx')
+  config.resolve.extensions.push('.ts', '.tsx');
 
-  return config
-}
+  return config;
+};

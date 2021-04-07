@@ -1,11 +1,11 @@
-import * as React from 'react'
-import { useRecoilState } from 'recoil'
-import { userState } from '../hooks/useAccess'
-import useApi from '../hooks/useApi'
+import * as React from 'react';
+import { useRecoilState } from 'recoil';
+import { userState } from '../hooks/useAccess';
+import useApi from '../hooks/useApi';
 
 const ProfileCheckProvider: React.FunctionComponent<any> = (props) => {
-  const [, setUser] = useRecoilState(userState)
-  const api = useApi()
+  const [, setUser] = useRecoilState(userState);
+  const api = useApi();
 
   React.useEffect(() => {
     api.user.getMyInfo().then((data) => {
@@ -13,10 +13,10 @@ const ProfileCheckProvider: React.FunctionComponent<any> = (props) => {
         auth: !!data,
         email: data?.email,
         nickname: data?.nickname,
-      })
-    })
-  }, [])
-  return props.children
-}
+      });
+    });
+  }, []);
+  return props.children;
+};
 
-export default ProfileCheckProvider
+export default ProfileCheckProvider;

@@ -1,35 +1,35 @@
-import { css } from '@emotion/react'
+import { css } from '@emotion/react';
 import {
   IconButton,
   InputBase,
   useMediaQuery,
   useTheme,
-} from '@material-ui/core'
-import * as React from 'react'
-import ShuffleIcon from '@material-ui/icons/Shuffle'
-import SearchIcon from '@material-ui/icons/SearchOutlined'
+} from '@material-ui/core';
+import * as React from 'react';
+import ShuffleIcon from '@material-ui/icons/Shuffle';
+import SearchIcon from '@material-ui/icons/SearchOutlined';
 
 //TODO: Search기능 연동 및 Enter, 키다운 입력시 처리 필요
 export interface ISearchBarProps {
   /**
    * enter 클릭시 존재하면 페이지 바로가기 없으면 검색
    */
-  onGoToDirect?: (val: string) => void
+  onGoToDirect?: (val: string) => void;
 
   /**
    * random버튼 클릭시에 바로 랜덤위키페이지로 이동
    */
-  onGoToRandom?: () => void
+  onGoToRandom?: () => void;
 
   /**
    * 검색어 존재하에 tab키 입력시, 바로 검색페이지로 이동
    */
-  onGoToSearch?: (val: string) => void
+  onGoToSearch?: (val: string) => void;
 }
 
 const SearchBar: React.FunctionComponent<ISearchBarProps> = () => {
-  const theme = useTheme()
-  const mq = useMediaQuery(theme.breakpoints.up('sm'))
+  const theme = useTheme();
+  const mq = useMediaQuery(theme.breakpoints.up('sm'));
   return (
     <div
       css={css`
@@ -92,7 +92,7 @@ const SearchBar: React.FunctionComponent<ISearchBarProps> = () => {
         </IconButton>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SearchBar
+export default SearchBar;

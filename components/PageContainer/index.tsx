@@ -1,3 +1,3 @@
-import PageContainer from './PageContainer'
+import PageContainer from './PageContainer';
 
-export default PageContainer
+export default PageContainer;

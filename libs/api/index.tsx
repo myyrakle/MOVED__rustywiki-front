@@ -1,3 +1,3 @@
-import api from './MainApiClient'
+import api from './MainApiClient';
 
-export default api
+export default api;

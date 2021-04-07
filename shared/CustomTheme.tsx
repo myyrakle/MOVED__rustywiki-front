@@ -1,12 +1,12 @@
-import { StylesProvider } from '@material-ui/core/styles'
+import { StylesProvider } from '@material-ui/core/styles';
 import {
   createMuiTheme,
   ThemeProvider as MuiThemeProvider,
-} from '@material-ui/core/styles'
-import { CssBaseline } from '@material-ui/core'
-import { css, Global } from '@emotion/react'
-import { useDarkMode } from '../hooks/useDarkMode'
-import { SnackbarProvider } from 'notistack'
+} from '@material-ui/core/styles';
+import { CssBaseline } from '@material-ui/core';
+import { css, Global } from '@emotion/react';
+import { useDarkMode } from '../hooks/useDarkMode';
+import { SnackbarProvider } from 'notistack';
 
 export const theme = createMuiTheme({
   palette: {
@@ -17,7 +17,7 @@ export const theme = createMuiTheme({
       secondary: '#0275d8',
     },
   },
-})
+});
 
 export const darkTheme = createMuiTheme({
   palette: {
@@ -31,14 +31,14 @@ export const darkTheme = createMuiTheme({
       secondary: '#768390',
     },
   },
-})
+});
 
-export type Theme = typeof theme
+export type Theme = typeof theme;
 
 export default function CustomTheme(props: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }): JSX.Element {
-  const { mode } = useDarkMode()
+  const { mode } = useDarkMode();
   return (
     <MuiThemeProvider theme={mode === 'dark' ? darkTheme : theme}>
       <Global
@@ -62,5 +62,5 @@ export default function CustomTheme(props: {
         <SnackbarProvider maxSnack={3}>{props.children}</SnackbarProvider>
       </StylesProvider>
     </MuiThemeProvider>
-  )
+  );
 }

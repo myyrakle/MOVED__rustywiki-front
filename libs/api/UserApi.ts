@@ -1,16 +1,16 @@
-import { AxiosInstance } from 'axios'
-import type { DefaultResponse } from './DefaultResponse.type'
+import { AxiosInstance } from 'axios';
+import type { DefaultResponse } from './DefaultResponse.type';
 
 type GetMyInfoResponse = DefaultResponse & {
-  email?: string
-  nickname?: string
-  reg_time?: number
-}
+  email?: string;
+  nickname?: string;
+  reg_time?: number;
+};
 export class UserApi {
   constructor(private axios: AxiosInstance) {}
 
   async getMyInfo(): Promise<GetMyInfoResponse> {
-    const result = await this.axios.get<GetMyInfoResponse>('/user/my-info')
-    return result?.data
+    const result = await this.axios.get<GetMyInfoResponse>('/user/my-info');
+    return result?.data;
   }
 }

@@ -1,6 +1,6 @@
-import * as React from 'react'
-import Link from 'next/link'
-import { css } from '@emotion/react'
+import * as React from 'react';
+import Link from 'next/link';
+import { css } from '@emotion/react';
 import {
   Button,
   Divider,
@@ -9,36 +9,36 @@ import {
   Menu,
   MenuItem,
   useTheme,
-} from '@material-ui/core'
-import PersonIcon from '@material-ui/icons/Person'
-import SearchBar from '../SearchBar'
-import { ROUTES } from '../../libs/const/routes'
-import { useDarkMode } from '../../hooks/useDarkMode'
-import useAccess, { AuthType } from '../../hooks/useAccess'
-import useApi from '../../hooks/useApi'
-import { useRouter } from 'next/router'
-import { STORAGE_KEY } from '../../libs/const/storageKey'
+} from '@material-ui/core';
+import PersonIcon from '@material-ui/icons/Person';
+import SearchBar from '../SearchBar';
+import { ROUTES } from '../../libs/const/routes';
+import { useDarkMode } from '../../hooks/useDarkMode';
+import useAccess, { AuthType } from '../../hooks/useAccess';
+import useApi from '../../hooks/useApi';
+import { useRouter } from 'next/router';
+import { STORAGE_KEY } from '../../libs/const/storageKey';
 
 export interface IHeaderProps {
-  user: AuthType
+  user: AuthType;
 }
 
 const Header: React.FunctionComponent<IHeaderProps> = () => {
-  const theme = useTheme()
-  const { mode, setMode } = useDarkMode()
-  const { user } = useAccess()
-  const api = useApi()
-  const router = useRouter()
+  const theme = useTheme();
+  const { mode, setMode } = useDarkMode();
+  const { user } = useAccess();
+  const api = useApi();
+  const router = useRouter();
 
   /** 로그인 메뉴 관련 */
-  const [anchorEl, setAnchorEl] = React.useState(null)
-  const open = Boolean(anchorEl)
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
   const handleClick = (event: any) => {
-    setAnchorEl(event.currentTarget)
-  }
+    setAnchorEl(event.currentTarget);
+  };
   const handleClose = () => {
-    setAnchorEl(null)
-  }
+    setAnchorEl(null);
+  };
 
   return (
     <>
@@ -118,7 +118,7 @@ const Header: React.FunctionComponent<IHeaderProps> = () => {
           <MenuItem>설정</MenuItem>
           <MenuItem
             onClick={() => {
-              mode === 'dark' ? setMode('light') : setMode('dark')
+              mode === 'dark' ? setMode('light') : setMode('dark');
             }}
           >
             {mode === 'dark' ? '라이트 테마로' : '다크 테마로'}
@@ -130,10 +130,10 @@ const Header: React.FunctionComponent<IHeaderProps> = () => {
           {user.auth ? (
             <MenuItem
               onClick={async () => {
-                const token = localStorage.getItem(STORAGE_KEY.REFRESH_TOKEN)
-                await api.auth.logout(token!)
-                localStorage.removeItem(STORAGE_KEY.REFRESH_TOKEN)
-                router.reload()
+                const token = localStorage.getItem(STORAGE_KEY.REFRESH_TOKEN);
+                await api.auth.logout(token!);
+                localStorage.removeItem(STORAGE_KEY.REFRESH_TOKEN);
+                router.reload();
               }}
             >
               로그아웃
@@ -149,7 +149,7 @@ const Header: React.FunctionComponent<IHeaderProps> = () => {
         <SearchBar />
       </Hidden>
     </>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

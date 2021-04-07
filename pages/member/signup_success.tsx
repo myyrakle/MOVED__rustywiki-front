@@ -1,24 +1,24 @@
-import { css } from '@emotion/react'
-import * as React from 'react'
-import DefaultLayout from '../../components/DefaultLayout'
-import NormalPageContainer from '../../components/NormalPageContainer'
-import { useRouter } from 'next/router'
-import { ROUTES } from '../../libs/const/routes'
+import { css } from '@emotion/react';
+import * as React from 'react';
+import DefaultLayout from '../../components/DefaultLayout';
+import NormalPageContainer from '../../components/NormalPageContainer';
+import { useRouter } from 'next/router';
+import { ROUTES } from '../../libs/const/routes';
 
 const SignUpSuccessPage: React.FunctionComponent<null> = () => {
-  const router = useRouter()
-  const email = router.query?.email
-  const [mount, setMount] = React.useState(false)
+  const router = useRouter();
+  const email = router.query?.email;
+  const [mount, setMount] = React.useState(false);
 
   React.useEffect(() => {
-    setMount(true)
+    setMount(true);
     if (!email && mount) {
-      router.replace(ROUTES.MAIN)
+      router.replace(ROUTES.MAIN);
     }
-  }, [router.query])
+  }, [router.query]);
 
   if (!email) {
-    return <div />
+    return <div />;
   }
   return (
     <DefaultLayout>
@@ -40,7 +40,7 @@ const SignUpSuccessPage: React.FunctionComponent<null> = () => {
         </p>
       </NormalPageContainer>
     </DefaultLayout>
-  )
-}
+  );
+};
 
-export default SignUpSuccessPage
+export default SignUpSuccessPage;

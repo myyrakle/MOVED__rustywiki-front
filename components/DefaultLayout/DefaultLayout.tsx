@@ -1,8 +1,8 @@
-import { css } from '@emotion/react'
-import { useMediaQuery, useTheme } from '@material-ui/core'
-import * as React from 'react'
-import Header from '../Header'
-import SideContent from '../SideContent/SideContent'
+import { css } from '@emotion/react';
+import { useMediaQuery, useTheme } from '@material-ui/core';
+import * as React from 'react';
+import Header from '../Header';
+import SideContent from '../SideContent/SideContent';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface IDefaultLayoutProps {}
@@ -10,9 +10,9 @@ export interface IDefaultLayoutProps {}
 const DefaultLayout: React.FunctionComponent<IDefaultLayoutProps> = ({
   children,
 }) => {
-  const theme = useTheme()
-  const mq = useMediaQuery(theme.breakpoints.up('md'))
-  const mobile = useMediaQuery(theme.breakpoints.down('xs'))
+  const theme = useTheme();
+  const mq = useMediaQuery(theme.breakpoints.up('md'));
+  const mobile = useMediaQuery(theme.breakpoints.down('xs'));
   return (
     <div>
       <Header />
@@ -44,7 +44,7 @@ const DefaultLayout: React.FunctionComponent<IDefaultLayoutProps> = ({
         </div>
       </main>
     </div>
-  )
-}
+  );
+};
 
-export default DefaultLayout
+export default DefaultLayout;

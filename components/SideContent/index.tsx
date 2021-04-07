@@ -1,3 +1,3 @@
-import SideContent from './SideContent'
+import SideContent from './SideContent';
 
-export default SideContent
+export default SideContent;

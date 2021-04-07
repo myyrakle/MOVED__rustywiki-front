@@ -1,48 +1,48 @@
-import { css } from '@emotion/react'
-import { Button, FormControl, TextField } from '@material-ui/core'
-import * as React from 'react'
-import DefaultLayout from '../../components/DefaultLayout'
-import NormalPageContainer from '../../components/NormalPageContainer'
-import { Controller, useForm } from 'react-hook-form'
-import { useRouter } from 'next/dist/client/router'
-import { ROUTES } from '../../libs/const/routes'
-import useApi from '../../hooks/useApi'
+import { css } from '@emotion/react';
+import { Button, FormControl, TextField } from '@material-ui/core';
+import * as React from 'react';
+import DefaultLayout from '../../components/DefaultLayout';
+import NormalPageContainer from '../../components/NormalPageContainer';
+import { Controller, useForm } from 'react-hook-form';
+import { useRouter } from 'next/dist/client/router';
+import { ROUTES } from '../../libs/const/routes';
+import useApi from '../../hooks/useApi';
 
 const spacing = css`
   margin-top: 10px;
-`
+`;
 
 type SingUpForm = {
-  email: string
-  password: string
-  passwordCheck: string
-  nickname: string
-}
+  email: string;
+  password: string;
+  passwordCheck: string;
+  nickname: string;
+};
 
 const SignUpPage: React.FunctionComponent<null> = () => {
-  const { control, handleSubmit, getValues, setError } = useForm<SingUpForm>()
-  const router = useRouter()
-  const api = useApi()
+  const { control, handleSubmit, getValues, setError } = useForm<SingUpForm>();
+  const router = useRouter();
+  const api = useApi();
 
-  const [loading, setLoading] = React.useState(false)
+  const [loading, setLoading] = React.useState(false);
 
   const submit = React.useCallback(async (v: SingUpForm) => {
     try {
-      await api.auth.signUp(v.email, v.password, v.nickname)
+      await api.auth.signUp(v.email, v.password, v.nickname);
       router.replace({
         path: ROUTES.SIGN_UP_SUCCESS,
         query: {
           email: v.email,
         },
-      })
+      });
     } catch (error) {
       if (error.email_duplicated) {
-        setError('email', { message: '이메일이 중복되었습니다.' })
+        setError('email', { message: '이메일이 중복되었습니다.' });
       }
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }, [])
+  }, []);
 
   return (
     <DefaultLayout>
@@ -72,7 +72,7 @@ const SignUpPage: React.FunctionComponent<null> = () => {
                     autoFocus
                     error={p.fieldState.invalid}
                   />
-                )
+                );
               }}
               rules={{
                 required: '이메일을 입력해주세요.',
@@ -110,7 +110,7 @@ const SignUpPage: React.FunctionComponent<null> = () => {
                         : '10자이상 입력해주세요.'
                     }
                   />
-                )
+                );
               }}
               rules={{
                 required: '패스워드를 입력해주세요',
@@ -138,15 +138,15 @@ const SignUpPage: React.FunctionComponent<null> = () => {
                     error={p.fieldState.invalid}
                     helperText={p.fieldState.error?.message}
                   />
-                )
+                );
               }}
               rules={{
                 required: true,
                 validate(v) {
-                  const formVal = getValues()
+                  const formVal = getValues();
                   return formVal.password === v
                     ? true
-                    : '패스워드가 일치하지 않습니다.'
+                    : '패스워드가 일치하지 않습니다.';
                 },
               }}
             />
@@ -167,7 +167,7 @@ const SignUpPage: React.FunctionComponent<null> = () => {
                     error={p.fieldState.invalid}
                     helperText={p.fieldState.error?.message}
                   />
-                )
+                );
               }}
               rules={{
                 required: '닉네임을 입력해주세요.',
@@ -198,7 +198,7 @@ const SignUpPage: React.FunctionComponent<null> = () => {
         </form>
       </NormalPageContainer>
     </DefaultLayout>
-  )
-}
+  );
+};
 
-export default SignUpPage
+export default SignUpPage;

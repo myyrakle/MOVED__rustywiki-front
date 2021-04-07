@@ -1,8 +1,8 @@
-import { css } from '@emotion/react'
-import { Button, TextField } from '@material-ui/core'
-import * as React from 'react'
-import DefaultLayout from '../../components/DefaultLayout'
-import NormalPageContainer from '../../components/NormalPageContainer'
+import { css } from '@emotion/react';
+import { Button, TextField } from '@material-ui/core';
+import * as React from 'react';
+import DefaultLayout from '../../components/DefaultLayout';
+import NormalPageContainer from '../../components/NormalPageContainer';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface IFindPasswordPageProps {}
@@ -38,7 +38,7 @@ const FindPasswordPage: React.FunctionComponent<IFindPasswordPageProps> = () => 
         </form>
       </NormalPageContainer>
     </DefaultLayout>
-  )
-}
+  );
+};
 
-export default FindPasswordPage
+export default FindPasswordPage;
