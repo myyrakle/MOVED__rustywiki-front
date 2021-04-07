@@ -3,7 +3,7 @@ import * as React from 'react'
 import DefaultLayout from '../../components/DefaultLayout'
 import NormalPageContainer from '../../components/NormalPageContainer'
 import { useRouter } from 'next/router'
-import { routes } from '../../libs/const/routes'
+import { ROUTES } from '../../libs/const/routes'
 
 const SignUpSuccessPage: React.FunctionComponent<null> = () => {
   const router = useRouter()
@@ -13,7 +13,7 @@ const SignUpSuccessPage: React.FunctionComponent<null> = () => {
   React.useEffect(() => {
     setMount(true)
     if (!email && mount) {
-      router.replace(routes.main)
+      router.replace(ROUTES.MAIN)
     }
   }, [router.query])
 

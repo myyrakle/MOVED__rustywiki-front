@@ -12,12 +12,12 @@ import {
 } from '@material-ui/core'
 import PersonIcon from '@material-ui/icons/Person'
 import SearchBar from '../SearchBar'
-import { routes } from '../../libs/const/routes'
+import { ROUTES } from '../../libs/const/routes'
 import { useDarkMode } from '../../hooks/useDarkMode'
 import useAccess, { AuthType } from '../../hooks/useAccess'
 import useApi from '../../hooks/useApi'
 import { useRouter } from 'next/router'
-import { storageKey } from '../../libs/const/storageKey'
+import { STORAGE_KEY } from '../../libs/const/storageKey'
 
 export interface IHeaderProps {
   user: AuthType
@@ -130,16 +130,16 @@ const Header: React.FunctionComponent<IHeaderProps> = () => {
           {user.auth ? (
             <MenuItem
               onClick={async () => {
-                const token = localStorage.getItem(storageKey.refreshToken)
+                const token = localStorage.getItem(STORAGE_KEY.REFRESH_TOKEN)
                 await api.auth.logout(token!)
-                localStorage.removeItem(storageKey.refreshToken)
+                localStorage.removeItem(STORAGE_KEY.REFRESH_TOKEN)
                 router.reload()
               }}
             >
               로그아웃
             </MenuItem>
           ) : (
-            <Link href={routes.login}>
+            <Link href={ROUTES.LOGIN}>
               <MenuItem>로그인</MenuItem>
             </Link>
           )}

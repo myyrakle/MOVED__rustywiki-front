@@ -1,7 +1,7 @@
-export const routes = {
-  main: '/',
-  login: '/member/login',
-  signUp: '/member/signup',
-  signUpSuccess: '/member/signup_success',
-  findPassword: '/member/find_password',
-}
+export const ROUTES = Object.freeze({
+  MAIN: '/',
+  LOGIN: '/member/login',
+  SIGN_UP: '/member/signup',
+  SIGN_UP_SUCCESS: '/member/signup_success',
+  FIND_PASSWORD: '/member/find_password',
+})

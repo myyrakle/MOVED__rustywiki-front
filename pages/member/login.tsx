@@ -10,8 +10,8 @@ import DefaultLayout from '../../components/DefaultLayout'
 import NormalPageContainer from '../../components/NormalPageContainer'
 import { userState } from '../../hooks/useAccess'
 import useApi from '../../hooks/useApi'
-import { routes } from '../../libs/const/routes'
-import { storageKey } from '../../libs/const/storageKey'
+import { ROUTES } from '../../libs/const/routes'
+import { STORAGE_KEY } from '../../libs/const/storageKey'
 
 type LoginFormType = {
   id: string
@@ -31,7 +31,7 @@ const LoginPage = (): JSX.Element => {
       try {
         setLoading(true)
         const loginRes = await api.auth.login(v.id, v.password)
-        localStorage.setItem(storageKey.refreshToken, loginRes.refresh_token)
+        localStorage.setItem(STORAGE_KEY.REFRESH_TOKEN, loginRes.refresh_token)
         const data = await api.user.getMyInfo()
         setUser({
           auth: true,
@@ -59,10 +59,10 @@ const LoginPage = (): JSX.Element => {
     if (user.auth) {
       const redirect = router.query?.redirect
       if (Array.isArray(redirect)) {
-        router.replace(redirect?.[0] ?? routes.main)
+        router.replace(redirect?.[0] ?? ROUTES.MAIN)
         return
       }
-      router.replace(redirect ?? routes.main)
+      router.replace(redirect ?? ROUTES.MAIN)
     }
   }, [user])
 
@@ -142,7 +142,7 @@ const LoginPage = (): JSX.Element => {
                 margin-top: 8px;
               `}
             >
-              <Link href={routes.findPassword}>[아이디/비밀번호 찾기]</Link>
+              <Link href={ROUTES.FIND_PASSWORD}>[아이디/비밀번호 찾기]</Link>
               <div
                 css={css`
                   display: flex;
@@ -152,7 +152,7 @@ const LoginPage = (): JSX.Element => {
                   }
                 `}
               >
-                <Link href={routes.signUp}>
+                <Link href={ROUTES.SIGN_UP}>
                   <Button size="small">회원가입</Button>
                 </Link>
                 <Button

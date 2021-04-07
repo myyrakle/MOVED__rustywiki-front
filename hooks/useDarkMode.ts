@@ -1,11 +1,11 @@
 import { useCallback, useEffect } from 'react'
 import { atom, useRecoilState } from 'recoil'
-import { storageKey } from '../libs/const/storageKey'
+import { STORAGE_KEY } from '../libs/const/storageKey'
 
 type ModeType = 'light' | 'dark' | ''
 const darkModeState = atom<ModeType>({
   default: '',
-  key: storageKey.darkMode,
+  key: STORAGE_KEY.DARK_MODE,
 })
 const mountedState = atom({ default: false, key: 'appMounted' })
 
@@ -20,10 +20,10 @@ export function useDarkMode(): {
     if (theme) {
       setMode(theme)
     }
-    return localStorage.setItem(storageKey.darkMode, theme)
+    return localStorage.setItem(STORAGE_KEY.DARK_MODE, theme)
   }, [])
   const getPreferMode = useCallback(() => {
-    return localStorage.getItem(storageKey.darkMode) as ModeType
+    return localStorage.getItem(STORAGE_KEY.DARK_MODE) as ModeType
   }, [])
 
   useEffect(() => {

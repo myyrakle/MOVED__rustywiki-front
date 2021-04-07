@@ -1,5 +1,5 @@
 import Axios from 'axios'
-import { storageKey } from '../const/storageKey'
+import { STORAGE_KEY } from '../const/storageKey'
 import util from '../util'
 import { AuthApi } from './AuthApi'
 import { UserApi } from './UserApi'
@@ -25,7 +25,7 @@ export class MainApi {
     this.axios.interceptors.response.use(
       (res) => {
         if (res.status === 401 && !(res.config as any).__isRetryRequest) {
-          const token = localStorage.getItem(storageKey.refreshToken)
+          const token = localStorage.getItem(STORAGE_KEY.REFRESH_TOKEN)
           if (!token) {
             return Promise.reject({
               ...res.data,
@@ -35,7 +35,7 @@ export class MainApi {
             .refresh(token)
             .catch((err) => {
               if (!err.success) {
-                localStorage.removeItem(storageKey.refreshToken)
+                localStorage.removeItem(STORAGE_KEY.REFRESH_TOKEN)
                 return Promise.reject()
               }
               return

@@ -5,7 +5,7 @@ import DefaultLayout from '../../components/DefaultLayout'
 import NormalPageContainer from '../../components/NormalPageContainer'
 import { Controller, useForm } from 'react-hook-form'
 import { useRouter } from 'next/dist/client/router'
-import { routes } from '../../libs/const/routes'
+import { ROUTES } from '../../libs/const/routes'
 import useApi from '../../hooks/useApi'
 
 const spacing = css`
@@ -30,7 +30,7 @@ const SignUpPage: React.FunctionComponent<null> = () => {
     try {
       await api.auth.signUp(v.email, v.password, v.nickname)
       router.replace({
-        path: routes.signUpSuccess,
+        path: ROUTES.SIGN_UP_SUCCESS,
         query: {
           email: v.email,
         },
