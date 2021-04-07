@@ -24,7 +24,7 @@ export class MainApi {
 
     this.axios.interceptors.response.use(
       (res) => {
-        if (res.status === 401) {
+        if (res.status === 401 && !(res.config as any).__isRetryRequest) {
           const token = localStorage.getItem(storageKey.refreshToken)
           if (!token) {
             return Promise.reject({
