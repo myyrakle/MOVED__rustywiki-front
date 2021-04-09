@@ -14,16 +14,12 @@ import PersonIcon from '@material-ui/icons/Person';
 import SearchBar from '../SearchBar';
 import { ROUTES } from '../../libs/const/routes';
 import { useDarkMode } from '../../hooks/useDarkMode';
-import useAccess, { AuthType } from '../../hooks/useAccess';
+import useAccess from '../../hooks/useAccess';
 import useApi from '../../hooks/useApi';
 import { useRouter } from 'next/router';
 import { STORAGE_KEY } from '../../libs/const/storageKey';
 
-export interface IHeaderProps {
-  user: AuthType;
-}
-
-const Header: React.FunctionComponent<IHeaderProps> = () => {
+const Header: React.FunctionComponent<any> = () => {
   const theme = useTheme();
   const { mode, setMode } = useDarkMode();
   const { user } = useAccess();
