@@ -5,9 +5,10 @@ export const ROUTES = Object.freeze({
   SIGN_UP_SUCCESS: '/member/signup_success',
   FIND_PASSWORD: '/member/find_password',
 
-  EDIT: '/edit/[pageName]',
-  BACK_LINK: '/backlink/[pageName]',
-  DISCUSS: '/discuss/[pageName]',
-  HISTORIES: '/histories/[pageName]',
-  ACL: '/ACL/[pageName]',
+  WIKI: '/detail/wiki/[pageName]',
+  EDIT: '/detail/edit/[pageName]',
+  BACK_LINK: '/detail/backlink/[pageName]',
+  DISCUSS: '/detail/discuss/[pageName]',
+  HISTORIES: '/detail/histories/[pageName]',
+  ACL: '/detail/ACL/[pageName]',
 });
