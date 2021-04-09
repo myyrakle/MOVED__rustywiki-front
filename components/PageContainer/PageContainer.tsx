@@ -1,36 +1,14 @@
 import { css } from '@emotion/react';
-import {
-  Button,
-  ButtonGroup,
-  Grid,
-  Paper,
-  useMediaQuery,
-  useTheme,
-} from '@material-ui/core';
+import { Grid, Paper, useMediaQuery, useTheme } from '@material-ui/core';
 import Link from 'next/link';
 import * as React from 'react';
-import StarOutline from '@material-ui/icons/StarOutline';
-import Star from '@material-ui/icons/Star';
 import dayjs from 'dayjs';
+import ToolBarGroup from '../ToolBarGroup';
 
 export interface IPageContainerProps {
   title?: string;
   updatedAt?: Date;
 }
-
-const ToolBarGroup = () => (
-  <ButtonGroup size="small">
-    <Button>
-      <Star fontSize="small" color={'primary'} />1
-      <StarOutline fontSize="small" color={'primary'} />1
-    </Button>
-    <Button>역링크</Button>
-    <Button>토론</Button>
-    <Button>편집</Button>
-    <Button>역사</Button>
-    <Button>ACL</Button>
-  </ButtonGroup>
-);
 
 const PageContainer: React.FunctionComponent<IPageContainerProps> = ({
   children,
@@ -78,7 +56,7 @@ const PageContainer: React.FunctionComponent<IPageContainerProps> = ({
               : ''}
           `}
         >
-          <ToolBarGroup />
+          <ToolBarGroup pageName={title} />
         </Grid>
       </h1>
       <p
