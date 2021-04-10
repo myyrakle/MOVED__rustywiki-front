@@ -1,3 +1,4 @@
+const MonacoEditorWebpackPlugin = require('monaco-editor-webpack-plugin');
 const path = require('path');
 
 module.exports = ({ config }) => {
@@ -26,5 +27,12 @@ module.exports = ({ config }) => {
 
   config.resolve.extensions.push('.ts', '.tsx');
 
+  // 모나코 설정
+  config.plugins.push(
+    new MonacoEditorWebpackPlugin({
+      languages: ['markdown'],
+      filename: 'static/[name].worker.js',
+    })
+  );
   return config;
 };

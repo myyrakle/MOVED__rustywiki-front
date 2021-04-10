@@ -10,5 +10,5 @@ export const ROUTES = Object.freeze({
   BACK_LINK: '/detail/backlink/[pageName]',
   DISCUSS: '/detail/discuss/[pageName]',
   HISTORIES: '/detail/histories/[pageName]',
-  ACL: '/detail/ACL/[pageName]',
+  ACL: '/detail/acl/[pageName]',
 });
