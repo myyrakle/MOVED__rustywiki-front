@@ -1,14 +1,14 @@
 export const ROUTES = Object.freeze({
-  MAIN: '/detail/wiki/main',
+  MAIN: '/d/wiki/러스트위키:메인',
   LOGIN: '/member/login',
   SIGN_UP: '/member/signup',
   SIGN_UP_SUCCESS: '/member/signup_success',
   FIND_PASSWORD: '/member/find_password',
 
-  WIKI: '/detail/wiki/[pageName]',
-  EDIT: '/detail/edit/[pageName]',
-  BACK_LINK: '/detail/backlink/[pageName]',
-  DISCUSS: '/detail/discuss/[pageName]',
-  HISTORIES: '/detail/histories/[pageName]',
-  ACL: '/detail/acl/[pageName]',
+  WIKI: '/d/wiki/[pageName]',
+  EDIT: '/d/edit/[pageName]',
+  BACK_LINK: '/d/backlink/[pageName]',
+  DISCUSS: '/d/discuss/[pageName]',
+  HISTORIES: '/d/histories/[pageName]',
+  ACL: '/d/acl/[pageName]',
 });
