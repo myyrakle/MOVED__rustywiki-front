@@ -13,7 +13,7 @@ export interface IPageContainerProps {
 const PageContainer: React.FunctionComponent<IPageContainerProps> = ({
   children,
   title = '',
-  updatedAt = new Date(),
+  updatedAt,
 }) => {
   const theme = useTheme();
   const mq = useMediaQuery(theme.breakpoints.down('xs'));
@@ -62,73 +62,24 @@ const PageContainer: React.FunctionComponent<IPageContainerProps> = ({
       <p
         css={css`
           font-size: 12px;
-          /* display: flex;
-          justify-content: flex-end;
-          */
           letter-spacing: -0.1px;
           text-align: right;
         `}
       >
-        최근 수정 시각:
-        <time
-          css={css`
-            margin-left: 5px;
-          `}
-        >
-          {dayjs(updatedAt).format('YYYY-MM-DD HH:mm:ss')}
-        </time>
+        {updatedAt && (
+          <>
+            최근 수정 시각:
+            <time
+              css={css`
+                margin-left: 5px;
+              `}
+            >
+              {dayjs(updatedAt).format('YYYY-MM-DD HH:mm:ss')}
+            </time>
+          </>
+        )}
       </p>
-      <div
-        css={css`
-          border-radius: 3px;
-          border: 1px solid #ccc;
-          display: flex;
-          > * {
-            margin: 0;
-          }
-          padding: 2px 2px 2px 4px;
-          align-items: center;
-          height: 29px;
-        `}
-      >
-        <h2
-          css={css`
-            font-size: 12px;
-            line-height: 1;
-          `}
-        >
-          분류:
-        </h2>
-        <ul
-          css={css`
-            display: flex;
-            list-style: none;
-            padding: 0;
-            margin-left: 5px;
-            font-size: 13px;
-            line-height: 1;
-            li {
-              /* padding-right: 3px; */
-              position: relative;
-            }
-            li + li {
-              &::before {
-                /* position: absolute; */
-                height: 5px;
-                margin: 0 5px;
-                content: '|';
-              }
-            }
-          `}
-        >
-          <li>
-            <Link href="1">1</Link>
-          </li>
-          <li>
-            <Link href="2">2</Link>
-          </li>
-        </ul>
-      </div>
+
       {children}
     </Paper>
   );

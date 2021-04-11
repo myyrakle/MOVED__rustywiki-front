@@ -12,21 +12,6 @@ module.exports = withCSS({
   },
 
   webpack: (config) => {
-    const rule = config.module.rules
-      .find((rule) => rule.oneOf)
-      .oneOf.find(
-        (r) =>
-          // Find the global CSS loader
-          r.issuer && r.issuer.include && r.issuer.include.includes('_app')
-      );
-    if (rule) {
-      rule.issuer.include = [
-        rule.issuer.include,
-        // Allow `monaco-editor` to import global CSS:
-        /[\\/]node_modules[\\/]monaco-editor[\\/]/,
-      ];
-    }
-
     config.module.rules.push({
       test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
       use: {
@@ -36,7 +21,6 @@ module.exports = withCSS({
         },
       },
     });
-
     config.plugins.push(
       new MonacoEditorWebpackPlugin({
         languages: ['markdown'],
