@@ -2,20 +2,23 @@ import Axios from 'axios';
 import { STORAGE_KEY } from '../const/storageKey';
 import util from '../util';
 import { AuthApi } from './AuthApi';
+import { DocApi } from './DocApi';
 import { UserApi } from './UserApi';
 
 export class MainApi {
   axios = Axios.create({
-    baseURL: '/api',
+    baseURL: util.isServer() ? 'http://125.133.80.144:11111' : '/api',
     withCredentials: true,
   });
 
   auth: AuthApi;
   user: UserApi;
+  doc: DocApi;
 
   constructor() {
     this.auth = new AuthApi(this.axios);
     this.user = new UserApi(this.axios);
+    this.doc = new DocApi(this.axios);
     this.axios.defaults.headers = { 'Content-Type': 'application/json' };
 
     if (util.isServer()) {

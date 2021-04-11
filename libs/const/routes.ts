@@ -1,5 +1,5 @@
 export const ROUTES = Object.freeze({
-  MAIN: '/',
+  MAIN: '/detail/wiki/main',
   LOGIN: '/member/login',
   SIGN_UP: '/member/signup',
   SIGN_UP_SUCCESS: '/member/signup_success',
