@@ -59,7 +59,7 @@ const Header: React.FunctionComponent<any> = () => {
           `}
         >
           <Grid container alignItems="center" style={{ flexShrink: 1 }}>
-            <Link href="/">
+            <Link href={{ pathname: ROUTES.MAIN }}>
               <a
                 css={css`
                   color: white;

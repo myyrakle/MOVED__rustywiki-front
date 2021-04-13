@@ -35,6 +35,7 @@ const PageContainer: React.FunctionComponent<IPageContainerProps> = ({
             css={css`
               color: ${theme.palette.text.primary};
               cursor: pointer;
+              width: 100%;
             `}
           >
             {title}
@@ -45,7 +46,6 @@ const PageContainer: React.FunctionComponent<IPageContainerProps> = ({
           container
           justify="flex-end"
           css={css`
-            flex-shrink: 1;
             ${mq
               ? `
               position: absolute;
