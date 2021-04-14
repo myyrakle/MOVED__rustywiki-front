@@ -6,7 +6,7 @@ type RegisterDocumentResponse = DefaultResponse & {
   is_new_doc: boolean;
 };
 
-type GetDocumentResponse = DefaultResponse & {
+export type GetDocumentResponse = DefaultResponse & {
   not_exists: boolean;
   title: string;
   content: string;
