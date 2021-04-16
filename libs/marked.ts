@@ -4,7 +4,8 @@ const md = markdown().use(
   wikiLinkPlugin({
     baseURL: '/d/wiki/',
     uriSuffix: '',
-    // linkPattern: /\[\[([\w\s/]+)(\|([\w\s/]+))?\]\]/,
+    // linkPattern: /\[\[([\w\s가-힣一-龯\\#+)(/]+)(\|([\w\s가-힣一-龯\\#+)(/]+))?\]\]/,
+    // linkPattern: /\[\[(.*?)\]\]/,
   })
 );
 
