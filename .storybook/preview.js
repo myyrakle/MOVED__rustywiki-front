@@ -5,6 +5,7 @@ import CustomTheme, { theme } from '../shared/CustomTheme';
 import { RecoilRoot } from 'recoil';
 import { useDarkMode } from '../hooks/useDarkMode';
 import { useEffect } from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query';
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
 };
@@ -29,10 +30,15 @@ addDecorator((Story, ctx) => {
   return <Story />;
 });
 
-addDecorator((Story) => (
-  <RecoilRoot>
-    <CustomTheme>
-      <Story />
-    </CustomTheme>
-  </RecoilRoot>
-));
+addDecorator((Story) => {
+  const queryClient = new QueryClient();
+  return (
+    <RecoilRoot>
+      <QueryClientProvider client={queryClient}>
+        <CustomTheme>
+          <Story />
+        </CustomTheme>
+      </QueryClientProvider>
+    </RecoilRoot>
+  );
+});
