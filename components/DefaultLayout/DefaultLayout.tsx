@@ -27,7 +27,7 @@ const DefaultLayout: React.FunctionComponent<IDefaultLayoutProps> = ({
         >
           <article
             css={css`
-              width: 100%;
+              width: ${mq ? 'calc(100% - 300px)' : '100%'};
             `}
           >
             {children}
@@ -35,7 +35,7 @@ const DefaultLayout: React.FunctionComponent<IDefaultLayoutProps> = ({
           <div
             css={css`
               min-width: ${mq ? '270px' : '100%'};
-              flex-basis: 270;
+              max-width: ${mq ? '270px' : '100%'};
               margin: 15px;
             `}
           >
