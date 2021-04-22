@@ -13,7 +13,7 @@ export type GetDocumentResponse = DefaultResponse & {
   last_update_utc: number;
 };
 
-type DocHistoryType = {
+export type DocHistoryType = {
   id: number;
   content: string;
   char_count: number;
@@ -23,7 +23,7 @@ type DocHistoryType = {
   writer_name: string;
 };
 
-type GetDocHistoriesResponseType = DefaultResponse &
+export type GetDocHistoriesResponseType = DefaultResponse &
   PagingResultType<DocHistoryType>;
 
 export class DocApi {

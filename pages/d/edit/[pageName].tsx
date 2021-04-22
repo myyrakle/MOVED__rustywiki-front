@@ -41,20 +41,27 @@ const EditPage: React.FunctionComponent<IEditPageProps> = ({ pageName }) => {
       <PageContainer title={pageName}>
         <form
           onSubmit={handleSubmit(async (values) => {
-            await mutateAsync({
-              title: pageName,
-              content: values?.content,
-            });
-            enqueueSnackbar('문서가 등록되었습니다.', {
-              variant: 'success',
-              autoHideDuration: 3000,
-              anchorOrigin: { horizontal: 'center', vertical: 'top' },
-            });
-
-            router.push({
-              pathname: ROUTES.WIKI,
-              query: { pageName },
-            });
+            try {
+              await mutateAsync({
+                title: pageName,
+                content: values?.content,
+              });
+              enqueueSnackbar('문서가 등록되었습니다.', {
+                variant: 'success',
+                autoHideDuration: 3000,
+                anchorOrigin: { horizontal: 'center', vertical: 'top' },
+              });
+              router.push({
+                pathname: ROUTES.WIKI,
+                query: { pageName },
+              });
+            } catch (error) {
+              enqueueSnackbar(error.message, {
+                variant: 'error',
+                autoHideDuration: 3000,
+                anchorOrigin: { horizontal: 'center', vertical: 'top' },
+              });
+            }
           })}
         >
           <Controller

@@ -24,14 +24,24 @@ export class MainApi {
     if (util.isServer()) {
       return;
     }
-
     this.axios.interceptors.response.use(
       (res) => {
-        if (res.status === 401 && !(res.config as any).__isRetryRequest) {
+        if (!res.data.success) {
+          return Promise.reject({
+            ...res.data,
+          });
+        }
+        return res;
+      },
+      (err) => {
+        if (
+          err.response.status === 401 &&
+          !(err.config as any).__isRetryRequest
+        ) {
           const token = localStorage.getItem(STORAGE_KEY.REFRESH_TOKEN);
           if (!token) {
             return Promise.reject({
-              ...res.data,
+              ...err.response.data,
             });
           }
           return this.auth
@@ -43,17 +53,11 @@ export class MainApi {
               }
               return;
             })
-            .then(() => Axios.request(res.config));
+            .then(() => Axios.request(err.config));
         }
-        if (!res.data.success) {
-          return Promise.reject({
-            ...res.data,
-          });
-        }
-        return res;
-      },
-      () => {
-        // console.log(err)
+        return Promise.reject({
+          ...err.response.data,
+        });
       }
     );
   }
