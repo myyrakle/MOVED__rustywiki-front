@@ -11,4 +11,6 @@ export const ROUTES = Object.freeze({
   DISCUSS: '/d/discuss/[pageName]',
   HISTORIES: '/d/histories/[pageName]',
   ACL: '/d/acl/[pageName]',
+  REVERT: '/d/revert/[pageName]',
+  DIFF: '/d/diff/[pageName]',
 });

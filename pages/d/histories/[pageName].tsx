@@ -5,6 +5,7 @@ import DefaultLayout from '../../../components/DefaultLayout';
 import PageContainer from '../../../components/PageContainer';
 import RevisionTable from '../../../components/RevisionTable';
 import useApi from '../../../hooks/useApi';
+import { QUERY_KEY } from '../../../libs/const/queryKey';
 import util from '../../../libs/util';
 interface IHistoriesPageProps {
   pageName: string;
@@ -17,7 +18,7 @@ const HistoriesPage: React.FunctionComponent<IHistoriesPageProps> = ({
   const api = useApi();
 
   const { data } = useQuery(
-    ['history', page],
+    [QUERY_KEY.HISTORIES, page],
     () => api.doc.getDocumentHistory(pageName, page),
     { keepPreviousData: true }
   );
@@ -25,6 +26,7 @@ const HistoriesPage: React.FunctionComponent<IHistoriesPageProps> = ({
     <DefaultLayout>
       <PageContainer title={pageName}>
         <RevisionTable
+          pageName={pageName}
           response={data}
           onChangePage={(current) => setPage(current)}
         />
