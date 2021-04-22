@@ -18,6 +18,7 @@ export type DocHistoryType = {
   content: string;
   char_count: number;
   increase: number;
+  revision_number: number;
   reg_utc: number; //timestamp
   writer_id: number;
   writer_name: string;
@@ -89,9 +90,7 @@ export class DocApi {
     const result = await this.axios.post<DefaultResponse>(
       '/doc/history/rollback',
       {
-        params: {
-          history_id: historyId,
-        },
+        history_id: +historyId,
       }
     );
     return result?.data;

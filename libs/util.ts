@@ -9,4 +9,9 @@ export default {
     const pageName = Array.isArray(tmp) ? tmp[0] : tmp;
     return pageName;
   },
+
+  getQueryItem(str: string | string[]): string {
+    const item = Array.isArray(str) ? str[0] : str;
+    return item;
+  },
 };

@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import {
   Box,
   Paper,
@@ -9,24 +10,29 @@ import {
   TableRow,
 } from '@material-ui/core';
 import { Pagination } from '@material-ui/lab';
+import Link from 'next/link';
 import * as React from 'react';
 import type {
   DocHistoryType,
   GetDocHistoriesResponseType,
 } from '../../libs/api/DocApi';
-
+import { ROUTES } from '../../libs/const/routes';
+import dayjs from 'dayjs';
 export interface IRevisionTableProps {
   response?: GetDocHistoriesResponseType;
   onChangePage: (page: number) => void;
+  pageName: string;
 }
 
 const RowItem = ({
+  pageName,
   row,
   previous,
   next,
   handlePrevious = () => null,
   handleNext = () => null,
 }: {
+  pageName: string;
   row?: DocHistoryType;
   previous?: DocHistoryType;
   next?: DocHistoryType;
@@ -36,10 +42,63 @@ const RowItem = ({
   return (
     <TableRow key={row?.id}>
       <TableCell component="th" scope="row">
-        {row?.id}
+        {row?.revision_number}
       </TableCell>
-      <TableCell align="right">{row?.reg_utc}</TableCell>
+      <TableCell align="right">
+        {row?.reg_utc
+          ? dayjs(row.reg_utc).format('YYYY-MM-DD HH:mm:ss')
+          : undefined}
+      </TableCell>
       <TableCell align="right">{row?.writer_name}</TableCell>
+      <TableCell align="center">
+        <div
+          css={css`
+            display: flex;
+            /* justify-content: space-between; */
+            justify-content: flex-end;
+
+            > * + * {
+              margin-left: 5px;
+            }
+          `}
+        >
+          <Link
+            href={{
+              pathname: ROUTES.WIKI,
+              query: {
+                pageName,
+                rev: row?.id,
+              },
+            }}
+          >
+            보기
+          </Link>
+          <span>|</span>
+          <Link
+            href={{
+              pathname: ROUTES.REVERT,
+              query: {
+                pageName,
+                rev: row?.id,
+              },
+            }}
+          >
+            이 버전으로 되돌리기
+          </Link>
+          <span>|</span>
+          <Link
+            href={{
+              pathname: ROUTES.DIFF,
+              query: {
+                pageName,
+                rev: row?.revision_number,
+              },
+            }}
+          >
+            비교
+          </Link>
+        </div>
+      </TableCell>
       <TableCell align="right">
         {(next?.id === undefined || (row && next.id > row.id)) && (
           <input
@@ -53,6 +112,7 @@ const RowItem = ({
           />
         )}
       </TableCell>
+
       <TableCell align="right">
         {(previous?.id === undefined || (row && previous.id < row.id)) && (
           <input
@@ -73,6 +133,7 @@ const RowItem = ({
 const RevisionTable: React.FunctionComponent<IRevisionTableProps> = ({
   response,
   onChangePage,
+  pageName,
 }) => {
   const [previous, setPrevious] = React.useState<DocHistoryType | undefined>(
     undefined
@@ -125,9 +186,20 @@ const RevisionTable: React.FunctionComponent<IRevisionTableProps> = ({
         <Table size="small">
           <TableHead>
             <TableRow>
-              <TableCell>리비전</TableCell>
-              <TableCell align="right">시간</TableCell>
-              <TableCell align="right">편집자</TableCell>
+              <TableCell width="100px">리비전</TableCell>
+              <TableCell width="200px" align="right">
+                시간
+              </TableCell>
+              <TableCell width="100px" align="right">
+                편집자
+              </TableCell>
+              <TableCell
+                css={css`
+                  min-width: 240px;
+                `}
+                width="230px"
+                align="right"
+              ></TableCell>
               <TableCell width="40px" align="right"></TableCell>
               <TableCell width="40px" align="right"></TableCell>
             </TableRow>
@@ -135,6 +207,7 @@ const RevisionTable: React.FunctionComponent<IRevisionTableProps> = ({
           <TableBody>
             {nextState === 'big' && (
               <RowItem
+                pageName={pageName}
                 row={next}
                 next={next}
                 previous={previous}
@@ -144,6 +217,7 @@ const RevisionTable: React.FunctionComponent<IRevisionTableProps> = ({
             )}
             {previousState === 'big' && (
               <RowItem
+                pageName={pageName}
                 row={previous}
                 next={next}
                 previous={previous}
@@ -153,6 +227,7 @@ const RevisionTable: React.FunctionComponent<IRevisionTableProps> = ({
             )}
             {response?.list?.map((row) => (
               <RowItem
+                pageName={pageName}
                 key={row.id}
                 row={row}
                 previous={previous}
@@ -163,6 +238,7 @@ const RevisionTable: React.FunctionComponent<IRevisionTableProps> = ({
             ))}
             {nextState === 'small' && (
               <RowItem
+                pageName={pageName}
                 row={next}
                 next={next}
                 previous={previous}
@@ -172,6 +248,7 @@ const RevisionTable: React.FunctionComponent<IRevisionTableProps> = ({
             )}
             {previousState === 'small' && (
               <RowItem
+                pageName={pageName}
                 row={previous}
                 next={next}
                 previous={previous}
@@ -183,7 +260,7 @@ const RevisionTable: React.FunctionComponent<IRevisionTableProps> = ({
         </Table>
         <Box display="flex" justifyContent="center">
           <Pagination
-            count={Math.floor((response?.total_count ?? 0 / 10) + 1) ?? 1}
+            count={Math.floor((response?.total_count ?? 0) / 10 + 1) ?? 1}
             onChange={(e, page) => {
               onChangePage(page);
             }}
