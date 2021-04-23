@@ -44,9 +44,9 @@ const RowItem = ({
       <TableCell component="th" scope="row">
         {row?.revision_number}
       </TableCell>
-      <TableCell align="right">
+      <TableCell align="center">
         {row?.reg_utc
-          ? dayjs(row.reg_utc).format('YYYY-MM-DD HH:mm:ss')
+          ? dayjs.unix(row.reg_utc).format('YYYY-MM-DD HH:mm:ss')
           : undefined}
       </TableCell>
       <TableCell align="right">{row?.writer_name}</TableCell>
@@ -187,7 +187,7 @@ const RevisionTable: React.FunctionComponent<IRevisionTableProps> = ({
           <TableHead>
             <TableRow>
               <TableCell width="100px">리비전</TableCell>
-              <TableCell width="200px" align="right">
+              <TableCell width="200px" align="center">
                 시간
               </TableCell>
               <TableCell width="100px" align="right">
