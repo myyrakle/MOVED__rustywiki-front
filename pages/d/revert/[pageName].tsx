@@ -1,14 +1,16 @@
 import { css } from '@emotion/react';
-import { Button } from '@material-ui/core';
+import { Button, useTheme } from '@material-ui/core';
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
-// import { useSnackbar } from 'notistack';
+import { useSnackbar } from 'notistack';
 import * as React from 'react';
 import { useMutation, useQuery } from 'react-query';
 import DefaultLayout from '../../../components/DefaultLayout';
 import NormalPageContainer from '../../../components/NormalPageContainer';
 import useApi from '../../../hooks/useApi';
 import { QUERY_KEY } from '../../../libs/const/queryKey';
+import { ROUTES } from '../../../libs/const/routes';
 import util from '../../../libs/util';
 
 interface IRevertPageProps {
@@ -18,9 +20,10 @@ interface IRevertPageProps {
 const RevertPage: React.FunctionComponent<IRevertPageProps> = ({
   pageName,
 }) => {
+  const theme = useTheme();
   const router = useRouter();
   const api = useApi();
-  // const { enqueueSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
 
   const rev = util.getQueryItem(router.query?.rev);
   const { data } = useQuery(
@@ -39,7 +42,18 @@ const RevertPage: React.FunctionComponent<IRevertPageProps> = ({
       <NormalPageContainer
         title={
           <div>
-            {pageName} <small>({rev}로 되돌리기)</small>
+            <Link href={{ pathname: ROUTES.WIKI, query: { pageName } }}>
+              <a
+                css={css`
+                  color: ${theme.palette.text.primary};
+                  cursor: pointer;
+                  width: 100%;
+                `}
+              >
+                {pageName}
+              </a>
+            </Link>
+            <small>({rev}로 되돌리기)</small>
           </div>
         }
       >
@@ -61,7 +75,11 @@ const RevertPage: React.FunctionComponent<IRevertPageProps> = ({
             variant="contained"
             onClick={async () => {
               await mutateAsync(rev);
-              // enqueueSnackbar({})
+              enqueueSnackbar('해당 리비전으로 되돌렸습니다.', {
+                variant: 'success',
+                autoHideDuration: 3000,
+              });
+              router.push({ pathname: ROUTES.WIKI, query: { pageName } });
             }}
           >
             되돌리기
