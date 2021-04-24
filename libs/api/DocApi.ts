@@ -95,4 +95,35 @@ export class DocApi {
     );
     return result?.data;
   }
+
+  async getDebateList(params: {
+    document_title: string;
+    open_yn: boolean;
+    page: number;
+  }): Promise<DefaultResponse> {
+    const result = await this.axios.get<DefaultResponse>('/doc/debate-list', {
+      params,
+    });
+    return result?.data;
+  }
+
+  async registerDebate(body: {
+    document_title: string;
+    subject: boolean;
+    content: number;
+  }): Promise<DefaultResponse> {
+    const result = await this.axios.post<DefaultResponse>('/doc/debate', body);
+    return result?.data;
+  }
+
+  async registerDebateComment(body: {
+    debate_id: string;
+    content: string;
+  }): Promise<DefaultResponse> {
+    const result = await this.axios.post<DefaultResponse>(
+      '/doc/debate/comment',
+      body
+    );
+    return result?.data;
+  }
 }

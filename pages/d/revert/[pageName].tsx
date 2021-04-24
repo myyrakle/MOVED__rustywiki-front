@@ -1,13 +1,13 @@
 import { css } from '@emotion/react';
-import { Button, useTheme } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useSnackbar } from 'notistack';
 import * as React from 'react';
 import { useMutation, useQuery } from 'react-query';
 import DefaultLayout from '../../../components/DefaultLayout';
 import NormalPageContainer from '../../../components/NormalPageContainer';
+import TitleLink from '../../../components/TitleLink/TitleLink';
 import useApi from '../../../hooks/useApi';
 import { QUERY_KEY } from '../../../libs/const/queryKey';
 import { ROUTES } from '../../../libs/const/routes';
@@ -20,7 +20,6 @@ interface IRevertPageProps {
 const RevertPage: React.FunctionComponent<IRevertPageProps> = ({
   pageName,
 }) => {
-  const theme = useTheme();
   const router = useRouter();
   const api = useApi();
   const { enqueueSnackbar } = useSnackbar();
@@ -42,17 +41,7 @@ const RevertPage: React.FunctionComponent<IRevertPageProps> = ({
       <NormalPageContainer
         title={
           <div>
-            <Link href={{ pathname: ROUTES.WIKI, query: { pageName } }}>
-              <a
-                css={css`
-                  color: ${theme.palette.text.primary};
-                  cursor: pointer;
-                  width: 100%;
-                `}
-              >
-                {pageName}
-              </a>
-            </Link>
+            <TitleLink pageName={pageName} />
             <small>({rev}로 되돌리기)</small>
           </div>
         }
