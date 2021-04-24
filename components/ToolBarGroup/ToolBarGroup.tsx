@@ -63,7 +63,7 @@ const ToolbarGroup: React.FunctionComponent<IToolbarGroupProps> = ({
         </Link>
       </Button>
       <Button>
-        <Link href={routeToHref(ROUTES.DISCUSS, pageName)}>
+        <Link href={routeToHref(ROUTES.DEBATE, pageName)}>
           <a>토론</a>
         </Link>
       </Button>

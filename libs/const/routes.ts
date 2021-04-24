@@ -8,7 +8,7 @@ export const ROUTES = Object.freeze({
   WIKI: '/d/wiki/[pageName]',
   EDIT: '/d/edit/[pageName]',
   BACK_LINK: '/d/backlink/[pageName]',
-  DISCUSS: '/d/discuss/[pageName]',
+  DEBATE: '/d/debate/[pageName]',
   HISTORIES: '/d/histories/[pageName]',
   ACL: '/d/acl/[pageName]',
   REVERT: '/d/revert/[pageName]',
