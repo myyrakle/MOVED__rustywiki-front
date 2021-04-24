@@ -9,6 +9,7 @@ export const ROUTES = Object.freeze({
   EDIT: '/d/edit/[pageName]',
   BACK_LINK: '/d/backlink/[pageName]',
   DEBATE: '/d/debate/[pageName]',
+  THREAD: '/d/thread/[pageName]',
   HISTORIES: '/d/histories/[pageName]',
   ACL: '/d/acl/[pageName]',
   REVERT: '/d/revert/[pageName]',
