@@ -1,10 +1,9 @@
 import { css } from '@emotion/react';
 import { Grid, Paper, useMediaQuery, useTheme } from '@material-ui/core';
-import Link from 'next/link';
 import * as React from 'react';
 import dayjs from 'dayjs';
 import ToolBarGroup from '../ToolBarGroup';
-import { ROUTES } from '../../libs/const/routes';
+import TitleLink from '../TitleLink/TitleLink';
 
 export interface IPageContainerProps {
   title?: string;
@@ -31,18 +30,7 @@ const PageContainer: React.FunctionComponent<IPageContainerProps> = ({
           align-items: center;
         `}
       >
-        <Link href={{ pathname: ROUTES.WIKI, query: { pageName: title } }}>
-          <a
-            css={css`
-              color: ${theme.palette.text.primary};
-              cursor: pointer;
-              width: 100%;
-            `}
-          >
-            {title}
-          </a>
-        </Link>
-
+        <TitleLink pageName={title} />
         <Grid
           container
           justify="flex-end"

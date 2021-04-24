@@ -1,5 +1,5 @@
 import { AxiosInstance } from 'axios';
-import type { DefaultResponse } from './DefaultResponse.type';
+import type { DefaultResponse } from './types/DefaultResponse.type';
 
 type GetMyInfoResponse = DefaultResponse & {
   email?: string;

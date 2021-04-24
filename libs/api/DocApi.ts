@@ -1,6 +1,7 @@
 import { AxiosInstance } from 'axios';
-import type { DefaultResponse } from './DefaultResponse.type';
-import type { PagingResultType } from './PagingResult.type';
+import { GetDocDebateListResponseType } from './types/DebateResponse.type';
+import type { DefaultResponse } from './types/DefaultResponse.type';
+import type { PagingResultType } from './types/PagingResult.type';
 
 type RegisterDocumentResponse = DefaultResponse & {
   is_new_doc: boolean;
@@ -26,6 +27,7 @@ export type DocHistoryType = {
 
 export type GetDocHistoriesResponseType = DefaultResponse &
   PagingResultType<DocHistoryType>;
+
 export type GetDocHistoryDetailResponseType = DefaultResponse & {
   prev_history: DocHistoryType;
   current_history: DocHistoryType;
@@ -98,19 +100,23 @@ export class DocApi {
 
   async getDebateList(params: {
     document_title: string;
-    open_yn: boolean;
-    page: number;
-  }): Promise<DefaultResponse> {
-    const result = await this.axios.get<DefaultResponse>('/doc/debate-list', {
-      params,
-    });
+    /** undefined일시 전체, true면 개방된 토론, false면 닫힌 토론 조회 */
+    open_yn?: boolean;
+    page?: number;
+  }): Promise<GetDocDebateListResponseType> {
+    const result = await this.axios.get<GetDocDebateListResponseType>(
+      '/doc/debate-list',
+      {
+        params,
+      }
+    );
     return result?.data;
   }
 
   async registerDebate(body: {
     document_title: string;
-    subject: boolean;
-    content: number;
+    subject: string;
+    content: string;
   }): Promise<DefaultResponse> {
     const result = await this.axios.post<DefaultResponse>('/doc/debate', body);
     return result?.data;
