@@ -29,7 +29,7 @@ const DebatePage: React.FunctionComponent<IDebatePageProps> = ({
   const api = useApi();
   const { enqueueSnackbar } = useSnackbar();
 
-  const { data } = useQuery([QUERY_KEY.DOC, pageName], () =>
+  const { data } = useQuery([QUERY_KEY.DEBATE, pageName], () =>
     api.doc.getDebateList({ open_yn: true, document_title: pageName })
   );
 
