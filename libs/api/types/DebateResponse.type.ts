@@ -1,5 +1,4 @@
-import type { DefaultResponse } from './DefaultResponse.type';
-import type { PagingResultType } from './PagingResult.type';
+import type { CursorPagingResultType } from './CursorPagingResult.type';
 
 export type DebateType = {
   id: number;
@@ -10,5 +9,4 @@ export type DebateType = {
   reg_utc: number;
 };
 
-export type GetDocDebateListResponseType = DefaultResponse &
-  PagingResultType<DebateType>;
+export type GetDocDebateListResponseType = CursorPagingResultType<DebateType>;

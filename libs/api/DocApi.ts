@@ -103,6 +103,8 @@ export class DocApi {
     /** undefined일시 전체, true면 개방된 토론, false면 닫힌 토론 조회 */
     open_yn?: boolean;
     page?: number;
+    limit?: number;
+    next_token?: string;
   }): Promise<GetDocDebateListResponseType> {
     const result = await this.axios.get<GetDocDebateListResponseType>(
       '/doc/debate-list',
