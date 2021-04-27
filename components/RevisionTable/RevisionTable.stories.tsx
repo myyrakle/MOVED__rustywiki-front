@@ -13,15 +13,4 @@ const Template: Story<IRevisionTableProps> = (args) => {
 };
 
 export const Default = Template.bind({});
-Default.args = {
-  response: {
-    total_count: 20,
-    list: [
-      { writer_name: 'test', id: 5, reg_utc: 123123123 },
-      { writer_name: 'test', id: 4, reg_utc: 123123123 },
-      { writer_name: 'test', id: 3, reg_utc: 123123123 },
-      { writer_name: 'test', id: 2, reg_utc: 123123123 },
-      { writer_name: 'test', id: 1, reg_utc: 123123123 },
-    ],
-  },
-};
+Default.args = {};
