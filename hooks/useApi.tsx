@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { AuthApi } from '../libs/api/AuthApi';
+import { DocApi } from '../libs/api/DocApi';
 import { MainApi } from '../libs/api/MainApiClient';
 import { UserApi } from '../libs/api/UserApi';
 
@@ -7,6 +8,7 @@ interface IApiProviderProps {
   mainApi?: MainApi;
   user?: UserApi;
   auth?: AuthApi;
+  doc?: DocApi;
 }
 
 const context = React.createContext<MainApi>({} as MainApi);
@@ -15,6 +17,7 @@ export const ApiProvider: React.FunctionComponent<IApiProviderProps> = ({
   mainApi = {} as MainApi,
   user,
   auth,
+  doc,
   children,
 }) => {
   if (user) {
@@ -22,6 +25,9 @@ export const ApiProvider: React.FunctionComponent<IApiProviderProps> = ({
   }
   if (auth) {
     mainApi.auth = auth;
+  }
+  if (doc) {
+    mainApi.doc = doc;
   }
 
   return <context.Provider value={mainApi}>{children}</context.Provider>;

@@ -13,7 +13,7 @@ import { QUERY_KEY } from '../../../libs/const/queryKey';
 import { ROUTES } from '../../../libs/const/routes';
 import util from '../../../libs/util';
 
-interface IRevertPageProps {
+export interface IRevertPageProps {
   pageName: string;
 }
 
