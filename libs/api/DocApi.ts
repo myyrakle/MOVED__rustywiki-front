@@ -1,3 +1,4 @@
+import { AxiosInstance } from 'axios';
 import { GetDocDebateListResponseType } from './types/DebateResponse.type';
 import type { DefaultResponse } from './types/DefaultResponse.type';
 import type { PagingResultType } from './types/PagingResult.type';
