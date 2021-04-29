@@ -5,10 +5,11 @@ import Link from 'next/link';
 import { useSnackbar } from 'notistack';
 import * as React from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { useMutation, useQuery } from 'react-query';
+import { useMutation, useInfiniteQuery } from 'react-query';
 import DefaultLayout from '../../../components/DefaultLayout';
 import PageContainer from '../../../components/PageContainer';
 import useApi from '../../../hooks/useApi';
+import { DebateType } from '../../../libs/api/types/DebateResponse.type';
 import { QUERY_KEY } from '../../../libs/const/queryKey';
 import { ROUTES } from '../../../libs/const/routes';
 import util from '../../../libs/util';
@@ -29,8 +30,19 @@ const DebatePage: React.FunctionComponent<IDebatePageProps> = ({
   const api = useApi();
   const { enqueueSnackbar } = useSnackbar();
 
-  const { data } = useQuery([QUERY_KEY.DEBATE, pageName], () =>
-    api.doc.getDebateList({ open_yn: true, document_title: pageName })
+  const { data } = useInfiniteQuery(
+    [QUERY_KEY.DEBATE, pageName],
+    (ctx) =>
+      api.doc.getDebateList({
+        open_yn: true,
+        document_title: pageName,
+        next_token: ctx.queryKey,
+      }),
+    {
+      getNextPageParam(lastPage) {
+        return lastPage.next_token;
+      },
+    }
   );
 
   const { mutateAsync } = useMutation(
@@ -43,12 +55,18 @@ const DebatePage: React.FunctionComponent<IDebatePageProps> = ({
       })
   );
 
+  const list = React.useMemo(() => {
+    return data?.pages?.reduce<DebateType[]>((pre, cur) => {
+      return pre.concat(cur.list);
+    }, []);
+  }, [data?.pages]);
+
   return (
     <DefaultLayout>
       <PageContainer title={pageName}>
         <h2>토론</h2>
         <ul>
-          {data?.list?.map((v) => (
+          {list?.map((v) => (
             <li key={v.id}>
               <Link
                 href={{
@@ -82,12 +100,15 @@ const DebatePage: React.FunctionComponent<IDebatePageProps> = ({
             <Controller
               name="subject"
               control={control}
-              render={({ field }) => (
+              rules={{ required: '주제를 입력해주세요.' }}
+              render={({ field, fieldState }) => (
                 <TextField
                   name="subject"
                   css={css`
                     width: 300px;
                   `}
+                  error={!!fieldState.error?.message}
+                  helperText={fieldState.error?.message}
                   label="주제"
                   onChange={field.onChange}
                 />
@@ -102,11 +123,14 @@ const DebatePage: React.FunctionComponent<IDebatePageProps> = ({
             <Controller
               name="content"
               control={control}
-              render={({ field }) => (
+              rules={{ required: '주제를 입력해주세요.' }}
+              render={({ field, fieldState }) => (
                 <TextField
                   name="content"
                   fullWidth
                   multiline
+                  error={!!fieldState.error?.message}
+                  helperText={fieldState.error?.message}
                   label="내용"
                   onChange={field.onChange}
                 />
