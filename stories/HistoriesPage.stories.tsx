@@ -14,10 +14,7 @@ const Template: Story = () => {
   return <HistoriesPage pageName="제목" />;
 };
 
-export const Default = Template.bind({});
-Default.args = {};
-
-export const ApiMocking = () => (
+export const Default = (): React.ReactNode => (
   <ApiProvider
     doc={
       {
@@ -44,4 +41,5 @@ export const ApiMocking = () => (
     <Template />
   </ApiProvider>
 );
-ApiMocking.args = {};
+
+Default.args = {};
