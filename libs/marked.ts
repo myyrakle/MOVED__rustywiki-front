@@ -1,13 +1,13 @@
-import markdown from 'markdown-it';
-import wikiLinkPlugin from '@ig3/markdown-it-wikilinks';
-
-//TODO:  특수문자 encodeURIComponent처리 필요
-const md = markdown().use(
-  wikiLinkPlugin({
-    baseURL: '/d/wiki/',
-    uriSuffix: '',
-    linkPattern: /\[\[([\w\s가-힣一-龯#+)(/]+)(\|([\w\s가-힣一-龯#+)(/]+))?\]\]/,
+import unified from 'unified';
+import markdown from 'remark-parse';
+import html from 'remark-html';
+import * as remarkWikiLink from 'remark-wiki-link';
+const md = unified()
+  .use(markdown)
+  .use(remarkWikiLink.wikiLinkPlugin, {
+    hrefTemplate: (permalink: string) => `/d/wiki/${permalink}`,
+    aliasDivider: '|',
   })
-);
+  .use(html);
 
 export const customMarked = md;

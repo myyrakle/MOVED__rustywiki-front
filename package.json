@@ -4,14 +4,12 @@
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.1.5",
-    "@ig3/markdown-it-wikilinks": "^1.0.1",
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.57",
     "axios": "^0.21.1",
     "core-js": "^3.9.1",
     "dayjs": "^1.10.4",
-    "markdown-it": "^12.0.4",
     "monaco-editor": "^0.23.0",
     "monaco-editor-webpack-plugin": "^3.0.1",
     "next": "^10.0.9",
@@ -22,6 +20,10 @@
     "react-monaco-editor": "^0.43.0",
     "react-query": "^3.13.0",
     "recoil": "^0.2.0",
+    "remark-html": "^13.0.1",
+    "remark-parse": "^9.0.0",
+    "remark-wiki-link": "^1.0.2",
+    "unified": "^9.2.1",
     "web-vitals": "^0.2.4"
   },
   "devDependencies": {
