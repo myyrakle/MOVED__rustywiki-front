@@ -1,4 +1,4 @@
-import { GetServerSidePropsResult, GetServerSidePropsContext } from 'next';
+import { GetStaticPropsContext, GetStaticPropsResult } from 'next';
 import * as React from 'react';
 import { QueryClient, useQuery } from 'react-query';
 import { dehydrate, DehydratedState } from 'react-query/hydration';
@@ -42,10 +42,10 @@ const WikiPage: React.FunctionComponent<IWikiPageProps> = (props) => {
   );
 };
 
-export async function getServerSideProps(
-  context: GetServerSidePropsContext
+export async function getStaticProps(
+  context: GetStaticPropsContext
 ): Promise<
-  GetServerSidePropsResult<{
+  GetStaticPropsResult<{
     dehydratedState: DehydratedState;
     pageName: string;
     content: string;
@@ -53,7 +53,7 @@ export async function getServerSideProps(
 > {
   const queryClient = new QueryClient();
 
-  const pageName = util.getPageName(context?.query);
+  const pageName = util.getPageName(context?.params);
 
   await queryClient.prefetchQuery([QUERY_KEY.DOC, pageName], () =>
     api.doc.getDocument(pageName)
@@ -61,13 +61,21 @@ export async function getServerSideProps(
 
   const result = queryClient.getQueryData([QUERY_KEY.DOC, pageName]) as any;
 
-  const content = customMarked.render(result?.content);
+  const content = await customMarked.process(result?.content);
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
       pageName,
-      content,
+      content: String(content),
     },
+    revalidate: 5,
+  };
+}
+
+export async function getStaticPaths() {
+  return {
+    paths: [],
+    fallback: true,
   };
 }
 
