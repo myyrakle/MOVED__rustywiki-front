@@ -22,20 +22,22 @@ const ThreadPage: React.FunctionComponent<IThreadPageProps> = ({
   debate_id,
 }) => {
   const api = useApi();
-  const { control, handleSubmit } = useForm();
-  const { data, fetchNextPage } = useInfiniteQuery(
+  const { control, handleSubmit, reset } = useForm();
+  const { data, refetch } = useInfiniteQuery(
     [QUERY_KEY.DEBATE, pageName, debate_id],
     () => api.doc.getDebate({ debate_id })
   );
 
   const { mutateAsync } = useMutation(
     [QUERY_KEY.DEBATE, pageName, debate_id],
-    (content: string) => api.doc.registerDebateComment({ debate_id, content })
+    (content: string) =>
+      api.doc.registerDebateComment({ debate_id: Number(debate_id), content })
   );
 
   const onSubmit = async (formValues: { content: string }) => {
+    reset();
     await mutateAsync(formValues.content);
-    await fetchNextPage();
+    await refetch();
   };
 
   const commentList = React.useMemo(

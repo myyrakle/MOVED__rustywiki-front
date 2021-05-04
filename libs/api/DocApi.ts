@@ -143,7 +143,7 @@ export class DocApi {
   }
 
   async registerDebateComment(body: {
-    debate_id: string;
+    debate_id: number;
     content: string;
   }): Promise<DefaultResponse> {
     const result = await this.axios.post<DefaultResponse>(

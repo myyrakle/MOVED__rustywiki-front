@@ -20,7 +20,7 @@ const DebateCard: React.FunctionComponent<IDebateCardProps> = ({
   const theme = useTheme();
   const { mode } = useDarkMode();
   return (
-    <Paper title="test">
+    <Paper style={{ marginBottom: 20 }}>
       <div
         css={css`
           padding: 7px 7px 7px 10px;
@@ -30,8 +30,8 @@ const DebateCard: React.FunctionComponent<IDebateCardProps> = ({
         `}
       >
         <div>
-          <span>#{id}</span>
-          <span>{writerName}</span>
+          <span id={id.toString()}>#{id}</span>
+          <span style={{ marginLeft: 5 }}>{writerName}</span>
         </div>
         <div>{dayjs(registerDate).format('YYYY-MM-DD HH:mm:ss')}</div>
       </div>
