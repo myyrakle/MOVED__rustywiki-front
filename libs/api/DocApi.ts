@@ -1,5 +1,8 @@
 import { AxiosInstance } from 'axios';
-import { GetDocDebateListResponseType } from './types/DebateResponse.type';
+import {
+  GetDocDebateListResponseType,
+  GetDocDebateResponseType,
+} from './types/DebateResponse.type';
 import type { DefaultResponse } from './types/DefaultResponse.type';
 import type { PagingResultType } from './types/PagingResult.type';
 
@@ -108,6 +111,21 @@ export class DocApi {
   }): Promise<GetDocDebateListResponseType> {
     const result = await this.axios.get<GetDocDebateListResponseType>(
       '/doc/debate-list',
+      {
+        params,
+      }
+    );
+    return result?.data;
+  }
+
+  async getDebate(params: {
+    debate_id: string;
+    page?: number;
+    limit?: number;
+    next_token?: string;
+  }): Promise<GetDocDebateResponseType> {
+    const result = await this.axios.get<GetDocDebateResponseType>(
+      '/doc/debate',
       {
         params,
       }
