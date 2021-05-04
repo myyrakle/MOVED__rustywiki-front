@@ -24,7 +24,7 @@ export const Default = (): React.ReactNode => (
             .map(() => ({
               char_count: fakerStatic.datatype.number(),
               content: fakerStatic.lorem.paragraphs(3),
-              id: fakerStatic.random.number(),
+              id: fakerStatic.datatype.number(),
               increase: fakerStatic.datatype.number(),
               reg_utc: Math.round(
                 fakerStatic.datatype.datetime().getTime() / 1000
@@ -32,7 +32,8 @@ export const Default = (): React.ReactNode => (
               revision_number: fakerStatic.datatype.number(),
               writer_id: fakerStatic.datatype.number(),
               writer_name: fakerStatic.name.lastName(),
-            }));
+            }))
+            .sort((a, b) => (a.id > b.id ? -1 : 1));
           return { list: histories, total_count: 20 } as any;
         },
       } as any

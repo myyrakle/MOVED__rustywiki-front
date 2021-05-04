@@ -57,15 +57,18 @@ const ThreadPage: React.FunctionComponent<IThreadPageProps> = ({
             content={debate.content}
           />
         )}
-        {commentList?.map((v, i) => (
-          <DebateCard
-            key={v.id}
-            id={i + 2}
-            registerDate={dayjs.unix(v.reg_utc).toDate()}
-            writerName={v.writer_name}
-            content={v.content}
-          />
-        ))}
+        {commentList?.map(
+          (v, i) =>
+            v && (
+              <DebateCard
+                key={v.id}
+                id={i + 2}
+                registerDate={dayjs.unix(v.reg_utc).toDate()}
+                writerName={v.writer_name}
+                content={v.content}
+              />
+            )
+        )}
         <form onSubmit={handleSubmit(onSubmit)}>
           <div
             css={css`
