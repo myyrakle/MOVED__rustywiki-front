@@ -1,7 +1,6 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 import RevisionTable, { IRevisionTableProps } from './RevisionTable';
-// import RecentChangeList, { IRecentChangeListProps } from './RecentChangeList';
 
 export default {
   title: 'Components/RevisionTable',

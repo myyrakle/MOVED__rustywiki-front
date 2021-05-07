@@ -63,6 +63,7 @@ const RowItem = ({
           `}
         >
           <Link
+            prefetch={false}
             href={{
               pathname: ROUTES.WIKI,
               query: {
@@ -75,6 +76,7 @@ const RowItem = ({
           </Link>
           <span>|</span>
           <Link
+            prefetch={false}
             href={{
               pathname: ROUTES.REVERT,
               query: {
@@ -87,6 +89,7 @@ const RowItem = ({
           </Link>
           <span>|</span>
           <Link
+            prefetch={false}
             href={{
               pathname: ROUTES.DIFF,
               query: {
@@ -260,7 +263,7 @@ const RevisionTable: React.FunctionComponent<IRevisionTableProps> = ({
         </Table>
         <Box display="flex" justifyContent="center">
           <Pagination
-            count={Math.floor((response?.total_count ?? 0) / 10 + 1) ?? 1}
+            count={Math.floor((response?.total_count ?? 0) / 10) ?? 1}
             onChange={(e, page) => {
               onChangePage(page);
             }}
