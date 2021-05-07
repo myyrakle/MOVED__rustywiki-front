@@ -1,4 +1,7 @@
+import { css } from '@emotion/react';
+import { Button } from '@material-ui/core';
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useSnackbar } from 'notistack';
 import * as React from 'react';
@@ -11,7 +14,10 @@ import { QUERY_KEY } from '../../../libs/const/queryKey';
 import { ROUTES } from '../../../libs/const/routes';
 import util from '../../../libs/util';
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
+const MarkdownEditor = dynamic(import('../../../components/MarkdownEditor'), {
+  ssr: false,
+});
+
 interface IEditPageProps {
   pageName: string;
 }
@@ -69,18 +75,26 @@ const EditPage: React.FunctionComponent<IEditPageProps> = ({ pageName }) => {
             control={control}
             render={(props) => {
               return (
-                <textarea
-                  cols={30}
-                  rows={10}
+                <MarkdownEditor
                   value={props.field.value}
-                  onChange={(e) => {
-                    props.field.onChange(e.target.value);
+                  onChange={(v) => {
+                    props.field.onChange(v);
                   }}
                 />
               );
             }}
           />
-          <button type="submit">test</button>
+
+          <div
+            css={css`
+              text-align: center;
+              margin-top: 20px;
+            `}
+          >
+            <Button type="submit" variant="contained">
+              등록
+            </Button>
+          </div>
         </form>
       </PageContainer>
     </DefaultLayout>

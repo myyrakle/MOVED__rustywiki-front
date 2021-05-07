@@ -22,15 +22,10 @@
 \* react-query를 사용하고 있고 상태관리가 크지않을거라고 생각해서 현재 recoil을 사용하고 있어요!
 * [storybook](https://storybook.js.org/tutorials/intro-to-storybook/react/en/get-started/)
 
-storybook
 
 
 
 
+## 문서
 
-
-
-🧾  문서
-
-* 🏃 [실행 및 개발방법](https://github.com/myyrakle/rustywiki-front/blob/main/docs/실행_및_개발방법.md)
-* ❤️ [기여가이드](https://github.com/myyrakle/rustywiki-front/blob/main/docs/기여가이드.md)
+* [실행 및 개발방법](https://github.com/myyrakle/rustywiki-front/blob/main/docs/실행_및_개발방법.md)
