@@ -24,14 +24,20 @@ interface IEditPageProps {
 
 const EditPage: React.FunctionComponent<IEditPageProps> = ({ pageName }) => {
   const api = useApi();
-  const { data } = useQuery(
+  const { data, isLoading } = useQuery(
     [QUERY_KEY.DOC, pageName],
     () => api.doc.getDocument(pageName),
     { cacheTime: 0 }
   );
-  const { control, handleSubmit } = useForm<{ content: string }>({
+  const { control, handleSubmit, reset } = useForm<{ content: string }>({
     defaultValues: { content: data?.content },
   });
+
+  React.useEffect(() => {
+    if (!isLoading) {
+      reset({ content: data?.content });
+    }
+  }, [isLoading]);
 
   const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
@@ -70,20 +76,22 @@ const EditPage: React.FunctionComponent<IEditPageProps> = ({ pageName }) => {
             }
           })}
         >
-          <Controller
-            name="content"
-            control={control}
-            render={(props) => {
-              return (
-                <MarkdownEditor
-                  value={props.field.value}
-                  onChange={(v) => {
-                    props.field.onChange(v);
-                  }}
-                />
-              );
-            }}
-          />
+          {!isLoading && (
+            <Controller
+              name="content"
+              control={control}
+              render={(props) => {
+                return (
+                  <MarkdownEditor
+                    value={props.field.value}
+                    onChange={(v) => {
+                      props.field.onChange(v);
+                    }}
+                  />
+                );
+              }}
+            />
+          )}
 
           <div
             css={css`

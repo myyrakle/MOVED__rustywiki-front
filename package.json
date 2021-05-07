@@ -17,7 +17,6 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-hook-form": "^7.0.0",
-    "react-monaco-editor": "^0.43.0",
     "react-query": "^3.13.0",
     "recoil": "^0.2.0",
     "remark-html": "^13.0.1",

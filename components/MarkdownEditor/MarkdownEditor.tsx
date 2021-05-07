@@ -224,18 +224,7 @@ monaco.editor.defineTheme('custom-theme', {
   base: 'vs-dark',
   inherit: true,
   rules: [
-    { token: 'header', foreground: '808080' },
-    // { token: 'custom-error', foreground: 'ff0000', fontStyle: 'bold' },
-    // { token: 'custom-notice', foreground: 'FFA500' },
-    // // { token: 'custom-date', foreground: '008800' },
-    { token: 'wiki-link', fontStyle: 'medium', foreground: 'FFA500' },
-    // {
-    //   token: 'custom-error',
-    //   foreground: 'ff0000',
-    //   fontStyle: 'bold',
-    // },
-    // { token: 'custom-notice', foreground: 'FFA500' },
-    // { token: 'custom-date', foreground: '008800' },
+    // { token: 'wiki-link', fontStyle: 'medium', foreground: 'FFA500' }
   ],
   colors: {},
 });
@@ -292,6 +281,7 @@ const MarkdownEditor: React.FunctionComponent<IRichEditorProps> = ({
         {
           theme: 'custom-theme',
           language: 'markdown-custom',
+          automaticLayout: true,
         }
       );
     }
