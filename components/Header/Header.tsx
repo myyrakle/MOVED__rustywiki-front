@@ -59,7 +59,7 @@ const Header: React.FunctionComponent<any> = () => {
           `}
         >
           <Grid container alignItems="center" style={{ flexShrink: 1 }}>
-            <Link href={{ pathname: ROUTES.MAIN }}>
+            <Link href={{ pathname: ROUTES.MAIN }} passHref>
               <a
                 css={css`
                   color: white;
@@ -126,8 +126,9 @@ const Header: React.FunctionComponent<any> = () => {
           {user.auth ? (
             <MenuItem
               onClick={async () => {
-                const token = localStorage.getItem(STORAGE_KEY.REFRESH_TOKEN);
-                await api.auth.logout(token!);
+                const token =
+                  localStorage.getItem(STORAGE_KEY.REFRESH_TOKEN) ?? '';
+                await api.auth.logout(token);
                 localStorage.removeItem(STORAGE_KEY.REFRESH_TOKEN);
                 router.reload();
               }}
