@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`markdown render to html footNotes [^1] 각주를 렌더링시 [^1] : 각주 링크가 서로 참조해야 한다 1`] = `
+"<p>각주,<sup id=\\"user-content-fnref-longnote\\"><a href=\\"#fn-longnote\\">longnote</a></sup> lorem ipsum
+이것은 각주여<sup id=\\"user-content-fnref-1\\"><a href=\\"#fn-1\\">1</a></sup></p>
+<div>
+<hr>
+<ol>
+<li id=\\"user-content-fn-longnote\\">각주입니다<a href=\\"#fnref-longnote\\">↩</a></li>
+<li id=\\"user-content-fn-1\\">각주입니다<a href=\\"#fnref-1\\">↩</a></li>
+</ol>
+</div>
+"
+`;
+
+exports[`markdown render to html html xss 허용되지 않은 html에 대해서는 위생화가 되어야 한다. 1`] = `
+"<h1>lorem ipsum</h1>
+<p>content</p>
+"
+`;
+
+exports[`markdown render to html html xss 허용되지 않은 script에 대해서는 위생화가 되어야 한다. 1`] = `
+"<h1>lorem ipsum</h1>
+<p>content alert(\\"x\\")</p>
+"
+`;
+
+exports[`markdown render to html 위키링크 [[content|alias]] alias가 대신 나와야 한다. 1`] = `
+"<p><a href=\\"/d/wiki/content\\">alias</a></p>
+"
+`;
+
+exports[`markdown render to html 위키링크 [[contents]] 렌더링이 a element로 되어야 한다. 1`] = `
+"<p><a href=\\"/d/wiki/테스트\\">테스트</a></p>
+"
+`;
