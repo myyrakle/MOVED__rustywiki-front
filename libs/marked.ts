@@ -5,11 +5,13 @@ import * as remarkWikiLink from 'remark-wiki-link';
 import * as footnotes from 'remark-footnotes';
 const md = unified()
   .use(markdown)
-  .use(footnotes.default)
   .use(remarkWikiLink.wikiLinkPlugin, {
     hrefTemplate: (permalink: string) => `/d/wiki/${permalink}`,
     aliasDivider: '|',
   })
-  .use(html, { sanitize: true });
+  .use(footnotes.default, { inlineNotes: true })
+  .use(html, {
+    sanitize: { clobberPrefix: '' },
+  });
 
 export const customMarked = md;

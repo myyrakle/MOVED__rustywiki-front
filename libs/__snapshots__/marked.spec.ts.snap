@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`markdown render to html footNotes [^1] 각주를 렌더링시 [^1] : 각주 링크가 서로 참조해야 한다 1`] = `
-"<p>각주,<sup id=\\"user-content-fnref-longnote\\"><a href=\\"#fn-longnote\\">longnote</a></sup> lorem ipsum
-이것은 각주여<sup id=\\"user-content-fnref-1\\"><a href=\\"#fn-1\\">1</a></sup></p>
+"<p>각주,<sup id=\\"fnref-longnote\\"><a href=\\"#fn-longnote\\">longnote</a></sup> lorem ipsum
+이것은 각주여<sup id=\\"fnref-1\\"><a href=\\"#fn-1\\">1</a></sup></p>
 <div>
 <hr>
 <ol>
-<li id=\\"user-content-fn-longnote\\">각주입니다<a href=\\"#fnref-longnote\\">↩</a></li>
-<li id=\\"user-content-fn-1\\">각주입니다<a href=\\"#fnref-1\\">↩</a></li>
+<li id=\\"fn-longnote\\">각주입니다<a href=\\"#fnref-longnote\\">↩</a></li>
+<li id=\\"fn-1\\">각주입니다<a href=\\"#fnref-1\\">↩</a></li>
 </ol>
 </div>
 "
