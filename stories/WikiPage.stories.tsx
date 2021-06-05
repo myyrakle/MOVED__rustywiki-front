@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 import WikiPage from '../pages/d/wiki/[pageName]';
-import { customMarked } from '../libs/marked';
+import { contentMark } from '../libs/marked';
 
 export default {
   title: 'Pages/Detail/WikiPage',
@@ -12,7 +12,7 @@ const Template: Story = (args) => {
   return (
     <WikiPage
       pageName="제목"
-      content={customMarked.processSync(args?.content ?? '')?.toString()}
+      content={contentMark.processSync(args?.content ?? '')?.toString()}
     />
   );
 };

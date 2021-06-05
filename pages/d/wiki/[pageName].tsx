@@ -7,7 +7,7 @@ import PageContainer from '../../../components/PageContainer';
 import api from '../../../libs/api';
 import { QUERY_KEY } from '../../../libs/const/queryKey';
 import util from '../../../libs/util';
-import { customMarked } from '../../../libs/marked';
+import { contentMark } from '../../../libs/marked';
 import type { GetDocumentResponse } from '../../../libs/api/DocApi';
 import Link from 'next/link';
 import { ROUTES } from '../../../libs/const/routes';
@@ -61,7 +61,7 @@ export async function getStaticProps(
 
   const result = queryClient.getQueryData([QUERY_KEY.DOC, pageName]) as any;
 
-  const content = await customMarked.process(result?.content);
+  const content = await contentMark.process(result?.content);
   return {
     props: {
       dehydratedState: dehydrate(queryClient),

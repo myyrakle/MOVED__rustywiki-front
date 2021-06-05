@@ -76,6 +76,7 @@
     "format": "prettier --write .",
     "lint": "eslint . --ext ts --ext tsx --ext js",
     "test": "jest",
+    "test:watch": "jest --watch --maxWorkers=50%",
     "test-all": "yarn lint && yarn type-check && yarn test",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
