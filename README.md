@@ -6,7 +6,7 @@
 
 - [Wiki Api Docs Git](https://github.com/myyrakle/rustywiki-api-document)
 
-- [Swagger 서버 주소](http://125.133.80.144:22222)
+- [Swagger 서버 주소](https://myyrakle.github.io/rustywiki-api-document/)
 
 - [개발용 백엔드 서버](http://125.133.80.144:11111)
 
