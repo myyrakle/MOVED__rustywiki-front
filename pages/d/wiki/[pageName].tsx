@@ -11,6 +11,7 @@ import { contentMark } from '../../../libs/marked';
 import type { GetDocumentResponse } from '../../../libs/api/DocApi';
 import Link from 'next/link';
 import { ROUTES } from '../../../libs/const/routes';
+import useApi from '../../../hooks/useApi';
 
 interface IWikiPageProps {
   pageName: string;
@@ -19,8 +20,12 @@ interface IWikiPageProps {
 
 const WikiPage: React.FunctionComponent<IWikiPageProps> = (props) => {
   const { pageName, content } = props;
+  const api = useApi();
 
-  const { data } = useQuery<GetDocumentResponse>([QUERY_KEY.DOC, pageName]);
+  const { data } = useQuery<GetDocumentResponse>(
+    [QUERY_KEY.DOC, pageName],
+    () => api.doc.getDocument(pageName)
+  );
 
   return (
     <DefaultLayout>
